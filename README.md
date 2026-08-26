@@ -4,7 +4,7 @@
 
 Scan job boards, score every posting against your CV, tailor a CV + cover letter grounded **only** in your real experience, track applications, draft follow-ups, and open the dashboard — all from OpenWorker. It delivers **finished deliverables**, never fabricates a CV fact, and asks before it sends or writes anything.
 
-It's a thin, **code-free** steering layer over the open-source **[`career-ops`](https://github.com/santifer/career-ops)** pipeline (and its web UI, **[`career-ops-ui`](https://github.com/Fighter90/career-ops-ui)**). The whole coworker is one Markdown file — [`career-ops.md`](./career-ops.md).
+It's a thin, **code-free** steering layer over the open-source **[`career-ops`](https://github.com/Fighter90/career-ops)** pipeline (and its web UI, **[`career-ops-ui`](https://github.com/Fighter90/career-ops-ui)**). The whole coworker is one Markdown file — [`career-ops.md`](./career-ops.md).
 
 > ✅ **Verified installable** against OpenWorker's own `parse_manifest` / `load_manifest_file` loader, and the underlying pipeline is verified to pull live vacancies (e.g. 200+ postings from a public Greenhouse board) and to launch the dashboard on `127.0.0.1:4317`.
 
@@ -17,7 +17,7 @@ It's a thin, **code-free** steering layer over the open-source **[`career-ops`](
 #    → https://openworker.com   (macOS / Windows, or run from source)
 
 # 2. Get a career-ops project folder (your data lives here)
-git clone https://github.com/santifer/career-ops
+git clone https://github.com/Fighter90/career-ops
 #    → set up cv.md, config/profile.yml, portals.yml per that repo's README
 
 # 3. Get this coworker
@@ -113,7 +113,7 @@ It's a **long-running, local-only** server (binds `127.0.0.1`, sends data nowher
 ## Related projects & links
 
 - **OpenWorker** — the host app this coworker runs in: [openworker.com](https://openworker.com) · [roster](https://openworker.com/#roster) · [github.com/andrewyng/openworker](https://github.com/andrewyng/openworker)
-- **career-ops** — the job-search engine this coworker drives: [github.com/santifer/career-ops](https://github.com/santifer/career-ops) · [career-ops.org](https://career-ops.org)
+- **career-ops** — the job-search engine this coworker drives: [github.com/Fighter90/career-ops](https://github.com/Fighter90/career-ops) · [career-ops.org](https://career-ops.org) (based on upstream [santifer/career-ops](https://github.com/santifer/career-ops))
 - **career-ops-ui** — the dashboard this coworker can launch: [github.com/Fighter90/career-ops-ui](https://github.com/Fighter90/career-ops-ui) · [cvstart.org](https://cvstart.org) · [wiki](https://github.com/Fighter90/career-ops-ui/wiki)
 
 ## License

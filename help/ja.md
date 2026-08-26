@@ -7,14 +7,14 @@
 
 - **これは** *ペルソナ* です — YAML frontmatter（どの機能を必要とするか）とシステムプロンプト（どのように振る舞うか）を備えた単一の Markdown ファイル（[`career-ops.md`](../career-ops.md)）です。「coworker ⊇ skill」。
 - **これはプログラムではありません**。OpenWorker はこのリポジトリの内容を **一切** コードとして実行しません。frontmatter は検証済みの機能と推奨コネクターを *宣言* し、プロンプトはエージェントを *方向づけ* ます。だからこそインストール画面には「no third-party code runs, but the instructions steer the coworker」と表示されます。
-- **これは [`career-ops`](https://github.com/santifer/career-ops) パイプラインを動かします**。ホスティングされたサービスではありません。すべてはあなたのマシン上で、あなたのプロジェクトフォルダーの中で、あなたのモデルキーで行われます。
+- **これは [`career-ops`](https://github.com/Fighter90/career-ops) パイプラインを動かします**。ホスティングされたサービスではありません。すべてはあなたのマシン上で、あなたのプロジェクトフォルダーの中で、あなたのモデルキーで行われます。
 
 ## 2. Requirements
 
 1. **OpenWorker** をインストール済みであること — [openworker.com](https://openworker.com)（macOS / Windows）からダウンロードするか、ソースから実行します。モデルキー（Anthropic、OpenAI、Google、または Ollama 経由のローカルモデル）を追加してください。
 2. あなたのデータで設定した、マシン上の **`career-ops` プロジェクトフォルダー**：
    ```bash
-   git clone https://github.com/santifer/career-ops
+   git clone https://github.com/Fighter90/career-ops
    cd career-ops
    # そのプロジェクトの README に従って cv.md、config/profile.yml、portals.yml を作成してください
    ```

@@ -7,14 +7,14 @@
 
 - **Bu bir** *persona*'dır — YAML frontmatter (hangi yetenekleri istediği) artı bir sistem promptu (nasıl davrandığı) içeren tek bir Markdown dosyasıdır ([`career-ops.md`](../career-ops.md)). "Coworker ⊇ skill."
 - **Bu bir** program **değildir**. OpenWorker bu deponun **hiçbir** kısmını kod olarak çalıştırmaz. Frontmatter, incelenmiş yetenekleri ve önerilen konnektörleri *bildirir*; prompt ise agent'ı *yönlendirir*. İşte bu yüzden kurulum ekranında "no third-party code runs, but the instructions steer the coworker" yazar.
-- **[`career-ops`](https://github.com/santifer/career-ops) pipeline'ını yönetir**, barındırılan bir hizmeti değil. Her şey sizin makinenizde, proje klasörünüzde, sizin model anahtarınızla gerçekleşir.
+- **[`career-ops`](https://github.com/Fighter90/career-ops) pipeline'ını yönetir**, barındırılan bir hizmeti değil. Her şey sizin makinenizde, proje klasörünüzde, sizin model anahtarınızla gerçekleşir.
 
 ## 2. Requirements
 
 1. **OpenWorker** kurulu olmalı — [openworker.com](https://openworker.com) adresinden indirin (macOS / Windows) veya kaynaktan çalıştırın. Bir model anahtarı ekleyin (Anthropic, OpenAI, Google veya Ollama üzerinden yerel bir model).
 2. Verilerinizle kurulmuş, makinenizde bir **`career-ops` proje klasörü**:
    ```bash
-   git clone https://github.com/santifer/career-ops
+   git clone https://github.com/Fighter90/career-ops
    cd career-ops
    # cv.md, config/profile.yml, portals.yml oluşturmak için o projenin README dosyasını izleyin
    ```

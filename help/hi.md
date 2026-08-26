@@ -7,14 +7,14 @@
 
 - **यह है** एक *persona* — एक ही Markdown फ़ाइल ([`career-ops.md`](../career-ops.md)) जिसमें YAML frontmatter (यह कौन-सी क्षमताएँ चाहता है) और एक सिस्टम प्रॉम्प्ट (यह कैसे व्यवहार करता है) होता है। "एक coworker ⊇ एक skill।"
 - **यह नहीं है** कोई प्रोग्राम। OpenWorker इस रिपॉज़िटरी की **कोई भी** सामग्री कोड के रूप में नहीं चलाता। frontmatter सत्यापित क्षमताओं और अनुशंसित कनेक्टर्स को *घोषित* करता है; प्रॉम्प्ट एजेंट को *दिशा देता है*। इसीलिए इंस्टॉल स्क्रीन पर लिखा होता है: "no third-party code runs, but the instructions steer the coworker"।
-- **यह [`career-ops`](https://github.com/santifer/career-ops) पाइपलाइन को चलाता है**, न कि किसी होस्टेड सेवा को। सब कुछ आपकी मशीन पर, आपके प्रोजेक्ट फ़ोल्डर में, आपकी मॉडल-कुंजी के साथ होता है।
+- **यह [`career-ops`](https://github.com/Fighter90/career-ops) पाइपलाइन को चलाता है**, न कि किसी होस्टेड सेवा को। सब कुछ आपकी मशीन पर, आपके प्रोजेक्ट फ़ोल्डर में, आपकी मॉडल-कुंजी के साथ होता है।
 
 ## 2. Requirements
 
 1. **OpenWorker** इंस्टॉल किया हुआ — [openworker.com](https://openworker.com) (macOS / Windows) से डाउनलोड करें या सोर्स से चलाएँ। एक मॉडल-कुंजी जोड़ें (Anthropic, OpenAI, Google, या Ollama के ज़रिए कोई स्थानीय मॉडल)।
 2. आपकी मशीन पर **एक `career-ops` प्रोजेक्ट फ़ोल्डर**, जो आपके डेटा के साथ सेट किया गया हो:
    ```bash
-   git clone https://github.com/santifer/career-ops
+   git clone https://github.com/Fighter90/career-ops
    cd career-ops
    # उस प्रोजेक्ट के README का पालन करके cv.md, config/profile.yml, portals.yml बनाएँ
    ```

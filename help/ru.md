@@ -7,14 +7,14 @@
 
 - **Это** *персона* — один Markdown-файл ([`career-ops.md`](../career-ops.md)) с YAML-frontmatter (какие возможности он запрашивает) плюс системный промпт (как он себя ведёт). «Coworker ⊇ skill».
 - **Это не** программа. OpenWorker **не** запускает содержимое этого репозитория как код. Frontmatter *объявляет* проверенные возможности и рекомендуемые коннекторы; промпт *направляет* агента. Именно поэтому на экране установки написано: «no third-party code runs, but the instructions steer the coworker».
-- **Он управляет пайплайном [`career-ops`](https://github.com/santifer/career-ops)**, а не облачным сервисом. Всё происходит на вашей машине, в вашей папке проекта, с вашим ключом модели.
+- **Он управляет пайплайном [`career-ops`](https://github.com/Fighter90/career-ops)**, а не облачным сервисом. Всё происходит на вашей машине, в вашей папке проекта, с вашим ключом модели.
 
 ## 2. Requirements
 
 1. **Установленный OpenWorker** — скачайте с [openworker.com](https://openworker.com) (macOS / Windows) или запустите из исходников. Добавьте ключ модели (Anthropic, OpenAI, Google или локальная модель через Ollama).
 2. **Папка проекта `career-ops`** на вашей машине, настроенная с вашими данными:
    ```bash
-   git clone https://github.com/santifer/career-ops
+   git clone https://github.com/Fighter90/career-ops
    cd career-ops
    # следуйте README того проекта, чтобы создать cv.md, config/profile.yml, portals.yml
    ```

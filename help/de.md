@@ -7,14 +7,14 @@ Eine vollständige Anleitung zur Installation und zum Ausführen des **career-op
 
 - **Es ist** eine *Persona* — eine einzelne Markdown-Datei ([`career-ops.md`](../career-ops.md)) mit YAML-Frontmatter (welche Fähigkeiten sie anfordert) plus einem System-Prompt (wie sie sich verhält). „Ein Coworker ⊇ ein Skill."
 - **Es ist kein** Programm. OpenWorker führt **nichts** aus diesem Repository als Code aus. Das Frontmatter *deklariert* geprüfte Fähigkeiten und empfohlene Konnektoren; der Prompt *steuert* den Agenten. Deshalb steht auf dem Installationsbildschirm: „no third-party code runs, but the instructions steer the coworker".
-- **Er steuert die [`career-ops`](https://github.com/santifer/career-ops)-Pipeline**, keinen gehosteten Dienst. Alles geschieht auf Ihrer Maschine, in Ihrem Projektordner, mit Ihrem Modell-Schlüssel.
+- **Er steuert die [`career-ops`](https://github.com/Fighter90/career-ops)-Pipeline**, keinen gehosteten Dienst. Alles geschieht auf Ihrer Maschine, in Ihrem Projektordner, mit Ihrem Modell-Schlüssel.
 
 ## 2. Requirements
 
 1. **OpenWorker** installiert — laden Sie es von [openworker.com](https://openworker.com) (macOS / Windows) herunter oder führen Sie es aus dem Quellcode aus. Fügen Sie einen Modell-Schlüssel hinzu (Anthropic, OpenAI, Google oder ein lokales Modell über Ollama).
 2. **Ein `career-ops`-Projektordner** auf Ihrer Maschine, eingerichtet mit Ihren Daten:
    ```bash
-   git clone https://github.com/santifer/career-ops
+   git clone https://github.com/Fighter90/career-ops
    cd career-ops
    # folgen Sie dem README dieses Projekts, um cv.md, config/profile.yml, portals.yml zu erstellen
    ```

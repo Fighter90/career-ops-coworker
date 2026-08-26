@@ -4,7 +4,7 @@
 
 ## What this repo is
 
-An **[OpenWorker](https://github.com/andrewyng/openworker) coworker** — a *persona* that steers OpenWorker to run the [`career-ops`](https://github.com/santifer/career-ops) job-search pipeline. The deliverable is **[`career-ops.md`](./career-ops.md)**: YAML frontmatter (declared capabilities + recommended connectors) followed by a Markdown system prompt. Everything else is documentation.
+An **[OpenWorker](https://github.com/andrewyng/openworker) coworker** — a *persona* that steers OpenWorker to run the [`career-ops`](https://github.com/Fighter90/career-ops) job-search pipeline. The deliverable is **[`career-ops.md`](./career-ops.md)**: YAML frontmatter (declared capabilities + recommended connectors) followed by a Markdown system prompt. Everything else is documentation.
 
 **This is not code.** OpenWorker runs nothing in this repo as a program — it snapshots the persona into a managed area and the *instructions* steer the agent. So there is no build, no test runner, no dependencies. The "correctness" bar is: (a) the persona parses and installs, (b) the docs are accurate and in sync, (c) the prompt is safe and honest.
 
@@ -28,4 +28,4 @@ OpenWorker's loader is Python. To confirm a change still installs, run its `pars
 
 - **Frontmatter fields** mirror `PersonaManifest`: `id, name, icon, tagline, description, tools, requires_folder, subagents, scheduling, messaging, connectors, team, default_permission_mode, recommended_models, skills, mcp, version, recommends, ships, group`.
 - **Versioning:** bump `version:` in the frontmatter on a meaningful prompt/behavior change, and add a `CHANGELOG.md` entry. There's no auto-update channel — `version` only drives OpenWorker's "replaces vN" note on re-import.
-- **Related projects:** `career-ops` (engine, upstream `santifer/career-ops`), `career-ops-ui` (`Fighter90/career-ops-ui`, the dashboard this coworker can launch), `openworker` (`andrewyng/openworker`, the host).
+- **Related projects:** `career-ops` (engine, upstream `Fighter90/career-ops`), `career-ops-ui` (`Fighter90/career-ops-ui`, the dashboard this coworker can launch), `openworker` (`andrewyng/openworker`, the host).

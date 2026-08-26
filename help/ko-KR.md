@@ -7,14 +7,14 @@
 
 - **이것은** *페르소나*입니다 — YAML frontmatter(어떤 기능을 원하는지)와 시스템 프롬프트(어떻게 동작하는지)를 갖춘 하나의 Markdown 파일([`career-ops.md`](../career-ops.md))입니다. 「coworker ⊇ skill」.
 - **이것은** 프로그램이 **아닙니다**. OpenWorker는 이 저장소의 내용을 코드로 **전혀** 실행하지 않습니다. frontmatter는 검증된 기능과 권장 커넥터를 *선언*하고, 프롬프트는 에이전트를 *유도*합니다. 그래서 설치 화면에 「no third-party code runs, but the instructions steer the coworker」라고 표시되는 것입니다.
-- **이것은 호스팅 서비스가 아니라 [`career-ops`](https://github.com/santifer/career-ops) 파이프라인을 구동합니다**. 모든 것이 당신의 머신에서, 당신의 프로젝트 폴더 안에서, 당신의 모델 키로 이루어집니다.
+- **이것은 호스팅 서비스가 아니라 [`career-ops`](https://github.com/Fighter90/career-ops) 파이프라인을 구동합니다**. 모든 것이 당신의 머신에서, 당신의 프로젝트 폴더 안에서, 당신의 모델 키로 이루어집니다.
 
 ## 2. Requirements
 
 1. **OpenWorker** 설치 — [openworker.com](https://openworker.com)에서 다운로드(macOS / Windows)하거나 소스에서 실행하세요. 모델 키를 추가하세요(Anthropic, OpenAI, Google, 또는 Ollama를 통한 로컬 모델).
 2. 당신의 데이터로 설정된, 머신 상의 **`career-ops` 프로젝트 폴더**:
    ```bash
-   git clone https://github.com/santifer/career-ops
+   git clone https://github.com/Fighter90/career-ops
    cd career-ops
    # cv.md, config/profile.yml, portals.yml을 만들려면 해당 프로젝트의 README를 따르세요
    ```

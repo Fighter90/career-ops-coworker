@@ -7,14 +7,14 @@
 
 - **它是** 一个 *persona*——一个 Markdown 文件（[`career-ops.md`](../career-ops.md)），带有 YAML frontmatter（声明它请求哪些能力）以及一段系统提示（定义它如何行事）。「coworker ⊇ skill」。
 - **它不是** 一个程序。OpenWorker **不会** 把这个仓库的任何内容作为代码运行。frontmatter *声明* 经过审核的能力和推荐的连接器；提示 *引导* 代理。这就是为什么安装界面上写着「no third-party code runs, but the instructions steer the coworker」。
-- **它驱动 [`career-ops`](https://github.com/santifer/career-ops) 流水线**，而不是某个托管服务。一切都发生在你的机器上、你的项目文件夹里，用你自己的模型密钥。
+- **它驱动 [`career-ops`](https://github.com/Fighter90/career-ops) 流水线**，而不是某个托管服务。一切都发生在你的机器上、你的项目文件夹里，用你自己的模型密钥。
 
 ## 2. Requirements
 
 1. **已安装 OpenWorker**——从 [openworker.com](https://openworker.com)（macOS / Windows）下载，或从源码运行。添加一个模型密钥（Anthropic、OpenAI、Google，或通过 Ollama 使用本地模型）。
 2. **一个 `career-ops` 项目文件夹**，位于你的机器上，并配置好你的数据：
    ```bash
-   git clone https://github.com/santifer/career-ops
+   git clone https://github.com/Fighter90/career-ops
    cd career-ops
    # 按照该项目的 README 创建 cv.md、config/profile.yml、portals.yml
    ```

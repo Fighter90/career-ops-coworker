@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate persona + help parity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install PyYAML
+        run: python3 -m pip install pyyaml
+
+      # Installable gate — the same rules OpenWorker's loader applies
+      # (id slug, permission mode, catalog tool ids, recommends ⊆ connectors).
+      - name: Validate the coworker persona
+        run: python3 scripts/validate-persona.py career-ops.md
+
+      # Help-bundle parity — every locale must carry the same H2/H3 structure
+      # as the English guide (translated text differs; the shape must not).
+      - name: Help bundle parity (17 locales)
+        run: |
+          python3 - <<'PY'
+          import glob, os, re, sys
+
+          def levels(path):
+              out = []
+              for line in open(path, encoding='utf-8'):
+                  m = re.match(r'^(#{1,6})\s+\S', line)
+                  if m and len(m.group(1)) in (2, 3):
+                      out.append(len(m.group(1)))
+              return out
+
+          en = 'help/en.md'
+          if not os.path.exists(en):
+              sys.exit('help/en.md is missing')
+          base = levels(en)
+          h2 = base.count(2); h3 = base.count(3)
+          files = sorted(glob.glob('help/*.md'))
+          print(f'baseline en.md: {h2} H2 / {h3} H3 over {len(files)} locales')
+
+          errors = []
+          for f in files:
+              lv = levels(f)
+              if lv.count(2) != h2 or lv.count(3) != h3:
+                  errors.append(f'{f}: {lv.count(2)} H2 / {lv.count(3)} H3 (expected {h2} / {h3})')
+              elif lv != base:
+                  errors.append(f'{f}: heading level order differs from en.md')
+
+          if len(files) != 17:
+              errors.append(f'expected 17 help locales, found {len(files)}')
+
+          if errors:
+              print('HELP PARITY FAILURES:')
+              for e in errors:
+                  print('  - ' + e)
+              sys.exit(1)
+          print('OK — all locales match the English heading structure')
+          PY

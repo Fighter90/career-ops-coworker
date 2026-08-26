@@ -7,14 +7,14 @@
 
 - **إنه** *شخصية* — ملف Markdown واحد ([`career-ops.md`](../career-ops.md)) يحتوي على YAML frontmatter (ما القدرات التي يطلبها) بالإضافة إلى موجّه نظام (كيف يتصرّف). «coworker ⊇ skill».
 - **إنه ليس** برنامجًا. لا يشغّل OpenWorker **أيًّا** من محتوى هذا المستودع كشيفرة. يُصرّح الـ frontmatter بالقدرات المُدقَّقة والموصِّلات المُوصى بها؛ ويوجّه الموجّهُ الوكيلَ. لهذا السبب تقول شاشة التثبيت: «no third-party code runs, but the instructions steer the coworker».
-- **إنه يشغّل خط معالجة [`career-ops`](https://github.com/santifer/career-ops)**، لا خدمة مستضافة. كل شيء يجري على جهازك، في مجلد مشروعك، بمفتاح النموذج الخاص بك.
+- **إنه يشغّل خط معالجة [`career-ops`](https://github.com/Fighter90/career-ops)**، لا خدمة مستضافة. كل شيء يجري على جهازك، في مجلد مشروعك، بمفتاح النموذج الخاص بك.
 
 ## 2. Requirements
 
 1. **OpenWorker** مُثبَّت — نزّله من [openworker.com](https://openworker.com) (macOS / Windows) أو شغّله من المصدر. أضف مفتاح نموذج (Anthropic أو OpenAI أو Google أو نموذجًا محليًّا عبر Ollama).
 2. **مجلد مشروع `career-ops`** على جهازك، مُهيَّأ ببياناتك:
    ```bash
-   git clone https://github.com/santifer/career-ops
+   git clone https://github.com/Fighter90/career-ops
    cd career-ops
    # اتبع ملف README الخاص بذلك المشروع لإنشاء cv.md وconfig/profile.yml وportals.yml
    ```

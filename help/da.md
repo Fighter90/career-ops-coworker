@@ -7,14 +7,14 @@ En komplet vejledning til at installere og køre **career-ops**-coworkeren inde 
 
 - **Det er** en *persona* — en enkelt Markdown-fil ([`career-ops.md`](../career-ops.md)) med YAML-frontmatter (hvilke funktioner den ønsker) plus en systemprompt (hvordan den opfører sig). »En coworker ⊇ en skill«.
 - **Det er ikke** et program. OpenWorker kører **intet** af dette repo som kode. Frontmatter *erklærer* efterprøvede funktioner og anbefalede connectors; prompten *styrer* agenten. Derfor står der på installationsskærmen »no third-party code runs, but the instructions steer the coworker«.
-- **Den driver [`career-ops`](https://github.com/santifer/career-ops)-pipelinen**, ikke en hostet tjeneste. Alt sker på din maskine, i din projektmappe, med din modelnøgle.
+- **Den driver [`career-ops`](https://github.com/Fighter90/career-ops)-pipelinen**, ikke en hostet tjeneste. Alt sker på din maskine, i din projektmappe, med din modelnøgle.
 
 ## 2. Requirements
 
 1. **OpenWorker** installeret — download fra [openworker.com](https://openworker.com) (macOS / Windows) eller kør fra kildekoden. Tilføj en modelnøgle (Anthropic, OpenAI, Google eller en lokal model via Ollama).
 2. **En `career-ops`-projektmappe** på din maskine, sat op med dine data:
    ```bash
-   git clone https://github.com/santifer/career-ops
+   git clone https://github.com/Fighter90/career-ops
    cd career-ops
    # følg det projekts README for at oprette cv.md, config/profile.yml, portals.yml
    ```
