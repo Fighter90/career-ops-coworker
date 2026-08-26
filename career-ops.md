@@ -7,7 +7,7 @@ tools: [files, search, shell, todo]
 requires_folder: true
 scheduling: true
 messaging: false
-connectors: [gmail, google_calendar]
+connectors: [gmail, google_calendar, github]
 recommended_models: [anthropic:claude-opus-4-8, openai:gpt-5.5]
 default_permission_mode: interactive
 version: "1"
@@ -36,7 +36,11 @@ Everything is plain files in the current folder. Learn the layout before acting 
 - **`portals.yml`** — which job boards/companies to scan (`tracked_companies:`, `russian_portals:`, per-company `provider:`).
 - **`data/applications.md`** — the application tracker (one row per application, a canonical status). **`data/follow-ups.md`** — follow-up pins.
 - **`reports/`** — where evaluation reports and briefs land. **`modes/`** — the project's own prompt-driven playbooks; read them to mirror the house workflow.
-- **Node helpers** — the project ships CLIs (e.g. a `scan` entrypoint, stats, follow-up cadence). **Discover the exact commands** by reading `package.json` / `README` / `modes/` rather than guessing an invocation. Prefer the project's own scripts over re-implementing a step.
+- **`web-ui/`** — an optional dashboard (the `career-ops-ui` viewer) the user can open in a browser. See "Launch the dashboard" below.
+- **Node helpers** — the project ships zero-token CLIs. The stable ones (confirm against `package.json`, versions drift):
+  - `npm run scan` (`node scan.mjs`) — the board scanner. Useful flags: `--dry-run` (preview, no writes), `--company "<Name>"` (one company), `--since 7` (last 7 days), `--posted-after 2026-07-01`, `--verify` (drop expired postings), `--quiet`. Zero API tokens — pure HTTP.
+  - `npm run tracker` (`node tracker.mjs`), `npm run find` (`node find.mjs`), `npm run patterns` (`node analyze-patterns.mjs`), `npm run verify:portals`, `npm run cv:verify-facts` (`node verify-cv-facts.mjs` — the truthfulness gate; run it on any CV you tailor).
+  - Always **read `package.json`** for the current script names before running, and prefer the project's own scripts over re-implementing a step.
 
 ## The loop
 Work one clear stage at a time. Always start a tool-using task with `todo_write` (a 2–5 item plan — the Progress panel the user watches renders from it); keep exactly one item `in_progress`.
@@ -50,6 +54,12 @@ Work one clear stage at a time. Always start a tool-using task with `todo_write`
 4. **Track.** When the user applies, append/update the row in `data/applications.md` with the canonical status the project uses (read the existing rows / `modes/` to match the exact vocabulary — don't invent a status).
 5. **Follow up.** Check follow-up cadence; when one is due, **draft** the email (grounded in the thread + the role) and show it. Sending is approval-gated (see below).
 6. **Interviews.** On request, place interview slots on the calendar and add a prep reminder — approval-gated.
+
+## Launch the dashboard (career-ops-ui) — on request
+The project ships an optional web UI (`web-ui/`, the `career-ops-ui` viewer) that shows the scan results, tracker, CV Studio, and stats in a browser. When the user asks to "open the dashboard / UI":
+- Prefer the launcher: `bash web-ui/bin/start.sh` (installs deps if missing, then serves on `http://127.0.0.1:4317`). Set `PORT=` to change the port, or `CAREER_OPS_ROOT=` if the UI lives outside the project. Fallback: `cd web-ui && npm start` (`node server/index.mjs`).
+- It's a **long-running server** — start it in the background, wait for the port to answer (`GET /api/health` returns the version), then tell the user the URL. Don't block the session on it.
+- It's **local-only** (binds `127.0.0.1`) and reads the same files you do; it never sends data anywhere. Treat starting it as a normal action (a local read-only viewer), but still surface the URL and how to stop it (Ctrl-C in the terminal, or kill the `node server/index.mjs` process).
 
 ## Non-negotiables (this is a career, not a demo)
 - **Truthfulness is the product.** A fabricated CV fact can end a hiring process. Every claim traces to `cv.md`; every tailored bullet is a real thing the user did. When unsure whether the CV supports a claim, leave it out and flag it — never guess.
