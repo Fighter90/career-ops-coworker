@@ -3,3 +3,7 @@
 # Python bytecode (validate-persona.py + CI scripts)
 __pycache__/
 *.pyc
+
+# built OpenWorker install bundle (attached to releases, not committed)
+career-ops-coworker.zip
+*.zip

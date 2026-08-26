@@ -37,6 +37,14 @@ OpenWorker에 연결하기 전에 이 폴더에서 `node scan.mjs --dry-run`을 
 
 > **처음이신가요?** 저장소 [README](https://github.com/Fighter90/career-ops-coworker#deploying--running--full-walkthrough)에 전체 배포 단계별 안내가 있습니다(사전 준비 → 모델 키 → 폴더 → 커넥터 → 첫 실행 → 대시보드 → 업데이트 → 문제 해결). 이 절은 요약본입니다.
 
+**가장 빠른 방법 — 명령 한 줄.** coworker가 구동하는 파이프라인을 준비하고(멱등 — 기존 `career-ops` / `web-ui`를 재사용), OpenWorker 설치 단계를 출력합니다:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Fighter90/career-ops-coworker/main/install.sh | bash
+```
+
+OpenWorker의 **Install a coworker**에서 세 가지 방법으로 추가하세요: **GitHub URL**(`https://github.com/Fighter90/career-ops-coworker`), **.zip**(Releases에서), 또는 `career-ops.md` 파일 **Import**. 셋 다 동일한 페르소나를 설치하며, 동의 전까지 비활성 상태로 놓입니다.
+
 1. `career-ops.md`를 받으세요 — 이 저장소를 클론하거나 단일 파일을 다운로드하세요.
 2. OpenWorker에서: **New coworker → Import**를 선택하고 `career-ops.md`를 고르세요(또는 OpenWorker가 이 저장소 폴더를 가리키도록 하세요).
 3. 가져오면 파일이 **OpenWorker의 관리 영역으로 스냅샷됩니다**. 이후 이 저장소에서 수정해도 설치된 사본은 바뀌지 않습니다 — 업데이트하려면 다시 가져오세요. `version:` 필드가 「replaces vN」 안내를 결정합니다.

@@ -37,6 +37,14 @@
 
 > **Уперше тут?** У [README](https://github.com/Fighter90/career-ops-coworker#deploying--running--full-walkthrough) репозиторію є повний покроковий розбір розгортання (вимоги → ключ моделі → тека → конектори → перший запуск → дашборд → оновлення → усунення проблем). Цей розділ — коротка версія.
 
+**Найшвидше — одна команда.** Готує конвеєр, яким керує coworker (ідемпотентно — повторно використовує наявні `career-ops` / `web-ui`), потім друкує кроки OpenWorker:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Fighter90/career-ops-coworker/main/install.sh | bash
+```
+
+У **Install a coworker** OpenWorker додайте його одним із трьох способів: **GitHub URL** (`https://github.com/Fighter90/career-ops-coworker`), **.zip** (з Releases) або **Import** файлу `career-ops.md`. Усі три встановлюють ту саму персону — вимкненою до вашої згоди.
+
 1. Отримайте `career-ops.md` — клонуйте цей репозиторій або завантажте один файл.
 2. В OpenWorker: **New coworker → Import** і виберіть `career-ops.md` (або вкажіть OpenWorker на папку цього репозиторію).
 3. Під час імпорту файл **фіксується знімком у керовану область OpenWorker**. Подальші правки в цьому репозиторії не змінюють встановлену копію — переімпортуйте, щоб оновити; поле `version:` керує позначкою «replaces vN».

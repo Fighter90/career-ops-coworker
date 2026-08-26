@@ -37,6 +37,14 @@
 
 > **جديد هنا؟** يحتوي [README](https://github.com/Fighter90/career-ops-coworker#deploying--running--full-walkthrough) المستودع على شرح كامل خطوة بخطوة للنشر (المتطلبات ← مفتاح النموذج ← المجلد ← الموصّلات ← أول تشغيل ← اللوحة ← التحديث ← معالجة المشكلات). هذا القسم هو النسخة المختصرة.
 
+**الأسرع — أمر واحد.** يجهّز المسار الذي يقوده الـ coworker (خامل التكرار — يعيد استخدام `career-ops` / `web-ui` الموجودَين)، ثم يطبع خطوات OpenWorker:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Fighter90/career-ops-coworker/main/install.sh | bash
+```
+
+في **Install a coworker** بـ OpenWorker، أضِفه بإحدى ثلاث طرق: **GitHub URL** (`https://github.com/Fighter90/career-ops-coworker`) أو **.zip** (من Releases) أو **Import** لملف `career-ops.md`. الطرق الثلاث تُثبّت الشخصية نفسها — معطّلة بانتظار موافقتك.
+
 1. احصل على `career-ops.md` — استنسخ هذا المستودع أو نزّل الملف المفرد.
 2. في OpenWorker: **New coworker → Import**، ثم اختر `career-ops.md` (أو وجّه OpenWorker إلى مجلد هذا المستودع).
 3. عند الاستيراد تُؤخذ **لقطة من الملف داخل المنطقة المُدارة في OpenWorker**. لا تغيّر التعديلات اللاحقة في هذا المستودع النسخةَ المُثبَّتة — أعد الاستيراد للتحديث؛ ويتحكّم الحقل `version:` في ملاحظة «replaces vN».

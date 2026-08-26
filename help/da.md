@@ -37,6 +37,14 @@ Kør `node scan.mjs --dry-run` fra denne mappe én gang for at bekræfte, at den
 
 > **Ny her?** Repoets [README](https://github.com/Fighter90/career-ops-coworker#deploying--running--full-walkthrough) har en fuld trin-for-trin-udrulning (forudsætninger → modelnøgle → mappe → connectors → første kørsel → dashboard → opdatering → fejlfinding). Dette afsnit er kortversionen.
 
+**Hurtigst — én kommando.** Den sætter den pipeline op, som coworkeren driver (idempotent — genbruger et eksisterende `career-ops` / `web-ui`) og udskriver derefter OpenWorker-trinene:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Fighter90/career-ops-coworker/main/install.sh | bash
+```
+
+I OpenWorkers **Install a coworker** tilføjer du den på en af tre måder: **GitHub URL** (`https://github.com/Fighter90/career-ops-coworker`), **.zip** (fra Releases) eller **Import** af filen `career-ops.md`. Alle tre installerer den samme persona — deaktiveret indtil dit samtykke.
+
 1. Hent `career-ops.md` — klon dette repo eller download den enkelte fil.
 2. I OpenWorker: **New coworker → Import**, og vælg `career-ops.md` (eller peg OpenWorker på denne repo-mappe).
 3. Ved import bliver filen **taget som et snapshot i OpenWorkers administrerede område**. Senere ændringer i dette repo ændrer ikke en installeret kopi — genimportér for at opdatere; feltet `version:` styrer »replaces vN«-noten.

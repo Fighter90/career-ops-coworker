@@ -2,6 +2,18 @@
 
 All notable changes to **career-ops-coworker** are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project adheres to [Semantic Versioning](https://semver.org/). The coworker's own `version:` (in `career-ops.md` frontmatter) tracks the major line — OpenWorker shows it as the "replaces vN" note on re-import.
 
+## [1.3.0] — 2026-08-26
+
+One-command install + install straight from the OpenWorker interface.
+
+### Added
+- **`install.sh` — one-command installer.** `curl -fsSL …/install.sh | bash` sets up everything the coworker drives — the `career-ops` pipeline and (optionally) the `web-ui` dashboard — then prints the three ways to install the persona in OpenWorker. It is **idempotent and non-destructive**: an already-set-up `career-ops` project or an already-installed `web-ui` is **detected and reused, never overwritten** (your `cv.md` / `portals.yml` / config are never touched); dependencies install only when missing. Overrides: `CAREER_OPS_ROOT`, `SKIP_UI`, `NO_CLONE_COWORKER`.
+- **`.zip` install bundle.** `scripts/build-bundle.sh` builds `career-ops-coworker.zip` (the persona as `manifest.md` — OpenWorker's own share format), attached to the release, for the app's **".zip"** install option.
+
+### Changed
+- **Install straight from OpenWorker's "Install a coworker" panel — GitHub URL, folder, or .zip — now works.** OpenWorker's repo installer (`install_from_git` → `install_from_dir`) treats **every** top-level `*.md` as a persona and errors on the first non-persona one, so the repo now keeps **`career-ops.md` as the only root Markdown file**: `README.md` moved to `.github/README.md` (GitHub still renders it at the repo root), and `CHANGELOG.md` + `CLAUDE.md` moved to `docs/`. Previously only the single-file Import worked.
+- **README rewritten install-first** — a one-command block and a three-method OpenWorker table (GitHub URL · .zip · Import) lead the page; the full manual walkthrough stays below. Help ×17 §3 gains the same one-command + three-methods note (heading structure unchanged — the 17-locale parity gate stays green).
+
 ## [1.2.0] — 2026-08-26
 
 Documentation — a full deployment walkthrough.

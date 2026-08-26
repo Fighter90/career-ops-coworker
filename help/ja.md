@@ -37,6 +37,14 @@ OpenWorker に接続する前に、このフォルダーで `node scan.mjs --dry
 
 > **はじめての方へ:** リポジトリの [README](https://github.com/Fighter90/career-ops-coworker#deploying--running--full-walkthrough) に、デプロイの完全なステップバイステップ（前提 → モデルキー → フォルダー → コネクター → 初回実行 → ダッシュボード → 更新 → トラブルシューティング）があります。この節は短縮版です。
 
+**最速 — コマンド1つ。** coworker が動かすパイプラインを用意し（冪等 — 既存の `career-ops` / `web-ui` を再利用）、OpenWorker の手順を表示します:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Fighter90/career-ops-coworker/main/install.sh | bash
+```
+
+OpenWorker の **Install a coworker** で、3つの方法のいずれかで追加します: **GitHub URL**(`https://github.com/Fighter90/career-ops-coworker`)、**.zip**(Releases から)、または `career-ops.md` ファイルの **Import**。いずれも同じペルソナをインストールし、同意まで無効の状態で置かれます。
+
 1. `career-ops.md` を入手します — このリポジトリをクローンするか、単一ファイルをダウンロードします。
 2. OpenWorker で **New coworker → Import** を開き、`career-ops.md` を選びます（または OpenWorker にこのリポジトリのフォルダーを指定します）。
 3. インポート時に、ファイルは **OpenWorker の管理領域にスナップショットとして取り込まれます**。このリポジトリでの後からの編集はインストール済みのコピーを変更しません — 更新するには再インポートします。`version:` フィールドが「replaces vN」の注記を制御します。

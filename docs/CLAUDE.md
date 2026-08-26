@@ -4,7 +4,7 @@
 
 ## What this repo is
 
-An **[OpenWorker](https://github.com/andrewyng/openworker) coworker** — a *persona* that steers OpenWorker to run the [`career-ops`](https://github.com/Fighter90/career-ops) job-search pipeline. The deliverable is **[`career-ops.md`](./career-ops.md)**: YAML frontmatter (declared capabilities + recommended connectors) followed by a Markdown system prompt. Everything else is documentation.
+An **[OpenWorker](https://github.com/andrewyng/openworker) coworker** — a *persona* that steers OpenWorker to run the [`career-ops`](https://github.com/Fighter90/career-ops) job-search pipeline. The deliverable is **[`career-ops.md`](../career-ops.md)**: YAML frontmatter (declared capabilities + recommended connectors) followed by a Markdown system prompt. Everything else is documentation.
 
 **This is not code.** OpenWorker runs nothing in this repo as a program — it snapshots the persona into a managed area and the *instructions* steer the agent. So there is no build, no test runner, no dependencies. The "correctness" bar is: (a) the persona parses and installs, (b) the docs are accurate and in sync, (c) the prompt is safe and honest.
 
@@ -18,7 +18,8 @@ An **[OpenWorker](https://github.com/andrewyng/openworker) coworker** — a *per
 2. **The prompt encodes career-ops doctrine, faithfully.** Truthfulness is the product: never instruct the coworker to invent a CV fact; keep writes/sends approval-gated; keep it local-first and private. Don't add capabilities that would bypass approvals or exfiltrate `cv.md` / salary data.
 3. **Reference real commands.** Job-search commands (`npm run scan`, `--dry-run`/`--company`/`--since`, `bin/start.sh`, `npm run cv:verify-facts`) must match the actual `career-ops` / `career-ops-ui` projects. When unsure, tell the prompt to read the project's `package.json` rather than hardcode a guess.
 4. **Keep `help/` in sync across all 17 locales.** A change to the workflow, a command, or a section belongs in every `help/<lang>.md`. Keep the `##`/`###` headings identical across locales; translate prose only — never code, file names, CLI flags, or YAML keys.
-5. **Docs must not overstate.** Only claim "verified" for things actually tested (installability via the real parser; live scan; dashboard launch). Keep the `README` "Verified" note honest.
+5. **Docs must not overstate.** Only claim "verified" for things actually tested (installability via the real parser; live scan; dashboard launch). Keep the `.github/README.md` "Verified" note honest.
+6. **`career-ops.md` must stay the ONLY top-level `*.md` file.** OpenWorker's repo/URL installer (`personas/registry.py::install_from_git` → `install_from_dir`) globs **every** root `*.md` and parses each as a persona — a non-persona `.md` at the root (README/CHANGELOG/CLAUDE) makes `_split_frontmatter` raise and the whole URL/folder/zip install fails. That's why this README lives in `.github/`, the changelog + this file live in `docs/`, and the build bundle is `manifest.md` only. **Never add another `.md` at the repo root.**
 
 ## Validate the persona (the one real check)
 
@@ -27,5 +28,5 @@ OpenWorker's loader is Python. To confirm a change still installs, run its `pars
 ## Conventions
 
 - **Frontmatter fields** mirror `PersonaManifest`: `id, name, icon, tagline, description, tools, requires_folder, subagents, scheduling, messaging, connectors, team, default_permission_mode, recommended_models, skills, mcp, version, recommends, ships, group`.
-- **Versioning:** bump `version:` in the frontmatter on a meaningful prompt/behavior change, and add a `CHANGELOG.md` entry. There's no auto-update channel — `version` only drives OpenWorker's "replaces vN" note on re-import.
+- **Versioning:** bump `version:` in the frontmatter on a meaningful prompt/behavior change, and add a `docs/CHANGELOG.md` entry. There's no auto-update channel — `version` only drives OpenWorker's "replaces vN" note on re-import.
 - **Related projects:** `career-ops` (engine, upstream `Fighter90/career-ops`), `career-ops-ui` (`Fighter90/career-ops-ui`, the dashboard this coworker can launch), `openworker` (`andrewyng/openworker`, the host).

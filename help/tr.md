@@ -37,6 +37,14 @@ OpenWorker’a bağlamadan önce bu klasörden bir kez `node scan.mjs --dry-run`
 
 > **Yeni misin?** Deponun [README](https://github.com/Fighter90/career-ops-coworker#deploying--running--full-walkthrough) dosyasında tam adım adım dağıtım rehberi var (ön koşullar → model anahtarı → klasör → bağlayıcılar → ilk çalıştırma → pano → güncelleme → sorun giderme). Bu bölüm kısa sürümdür.
 
+**En hızlısı — tek komut.** Coworker'ın sürdüğü hattı hazırlar (idempotent — mevcut `career-ops` / `web-ui`'yi yeniden kullanır), ardından OpenWorker adımlarını yazdırır:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Fighter90/career-ops-coworker/main/install.sh | bash
+```
+
+OpenWorker'ın **Install a coworker** bölümünde üç yoldan biriyle ekleyin: **GitHub URL** (`https://github.com/Fighter90/career-ops-coworker`), **.zip** (Releases'ten) veya `career-ops.md` dosyasını **Import**. Üçü de aynı persona'yı kurar — onayınıza kadar devre dışı.
+
 1. `career-ops.md` dosyasını edinin — bu depoyu klonlayın veya tek dosyayı indirin.
 2. OpenWorker'da: **New coworker → Import** ve `career-ops.md` dosyasını seçin (veya OpenWorker'ı bu depo klasörüne yönlendirin).
 3. İçe aktarma sırasında dosya **OpenWorker'ın yönetilen alanına anlık görüntü olarak alınır**. Bu depodaki sonraki düzenlemeler kurulu bir kopyayı değiştirmez — güncellemek için yeniden içe aktarın; `version:` alanı "replaces vN" notunu belirler.

@@ -37,6 +37,14 @@
 
 > **新手?** 仓库 [README](https://github.com/Fighter90/career-ops-coworker#deploying--running--full-walkthrough) 有完整的分步部署指南(前置条件 → 模型密钥 → 文件夹 → 连接器 → 首次运行 → 仪表板 → 更新 → 排错)。本节是精简版。
 
+**最快 —— 一条命令。** 它准备好 coworker 驱动的流水线（幂等 —— 复用已有的 `career-ops` / `web-ui`），然后打印 OpenWorker 的步骤:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Fighter90/career-ops-coworker/main/install.sh | bash
+```
+
+在 OpenWorker 的 **Install a coworker** 中，用三种方式之一添加: **GitHub URL**(`https://github.com/Fighter90/career-ops-coworker`)、**.zip**(来自 Releases)或 **Import** `career-ops.md` 文件。三者安装的是同一个 persona —— 在你同意前处于禁用状态。
+
 1. 获取 `career-ops.md`——克隆此仓库或下载这一个文件。
 2. 在 OpenWorker 中：**New coworker → Import**，然后选择 `career-ops.md`（或将 OpenWorker 指向此仓库文件夹）。
 3. 导入时，该文件会 **被快照保存到 OpenWorker 的托管区域**。之后在此仓库中的修改不会改变已安装的副本——重新导入即可更新；`version:` 字段驱动「replaces vN」提示。

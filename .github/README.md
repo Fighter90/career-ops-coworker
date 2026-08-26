@@ -4,33 +4,51 @@
 
 Scan job boards, score every posting against your CV, tailor a CV + cover letter grounded **only** in your real experience, track applications, draft follow-ups, and open the dashboard — all from OpenWorker. It delivers **finished deliverables**, never fabricates a CV fact, and asks before it sends or writes anything.
 
-It's a thin, **code-free** steering layer over the open-source **[`career-ops`](https://github.com/Fighter90/career-ops)** pipeline (and its web UI, **[`career-ops-ui`](https://github.com/Fighter90/career-ops-ui)**). The whole coworker is one Markdown file — [`career-ops.md`](./career-ops.md).
+It's a thin, **code-free** steering layer over the open-source **[`career-ops`](https://github.com/Fighter90/career-ops)** pipeline (and its web UI, **[`career-ops-ui`](https://github.com/Fighter90/career-ops-ui)**). The whole coworker is one Markdown file — [`career-ops.md`](../career-ops.md).
 
-> ✅ **Verified installable** against OpenWorker's own `parse_manifest` / `load_manifest_file` loader, and the underlying pipeline is verified to pull live vacancies (e.g. 200+ postings from a public Greenhouse board) and to launch the dashboard on `127.0.0.1:4317`.
+> ✅ **Verified installable** against OpenWorker's own `parse_manifest` / `load_manifest_file` loader — and against its repo installer (`install_from_git` → `install_from_dir`), so the **GitHub-URL, folder, and .zip** install paths all work. The underlying pipeline is verified to pull live vacancies (e.g. 200+ postings from a public Greenhouse board) and to launch the dashboard on `127.0.0.1:4317`.
 
 ---
 
-## Quick start (TL;DR)
+## Install
+
+### 1 · One command (sets up everything the coworker drives)
 
 ```bash
-# 1. Install OpenWorker + add a model key   → https://openworker.com
-# 2. Clone the pipeline (your data lives here) and install its deps
-git clone https://github.com/Fighter90/career-ops && cd career-ops && npm install
-# 3. Add the dashboard (optional) so "open the dashboard" works
-git clone https://github.com/Fighter90/career-ops-ui web-ui
-# 4. Clone this coworker
-git clone https://github.com/Fighter90/career-ops-coworker
+curl -fsSL https://raw.githubusercontent.com/Fighter90/career-ops-coworker/main/install.sh | bash
 ```
 
-In OpenWorker: **New coworker → Import** → pick `career-ops.md` → open a **Job-Search Coworker** session → choose your `career-ops` folder → ask *"Scan my boards and give me the top 5 fits this week."*
+This **idempotent, non-destructive** installer **checks for an existing `career-ops` project and `web-ui` dashboard and reuses them untouched** if they're already installed — cloning only what's missing, and installing npm dependencies only when they're absent. Your `cv.md` / `portals.yml` / `config/` are **never** modified. Re-run it any time; it only fills gaps. When it finishes it prints the three ways to install the persona in OpenWorker (below).
 
-**New here? Follow the full walkthrough below** — it explains every step, the folder layout, connectors, and how to launch the dashboard.
+| Override | Effect |
+|---|---|
+| `CAREER_OPS_ROOT=/path` | use/create the `career-ops` project here (default `~/career-ops`); an existing project there is detected and reused |
+| `SKIP_UI=1` | don't set up the `web-ui` dashboard |
+| `NO_CLONE_COWORKER=1` | don't clone this repo locally (URL/zip install only) |
+
+> Prefer to do it by hand? The **[full walkthrough](#deploying--running--full-walkthrough)** below explains every step.
+
+### 2 · Install the coworker in OpenWorker
+
+Install [OpenWorker](https://openworker.com) and add a model key (Anthropic / OpenAI / Google, **or** a local [Ollama](https://ollama.com)). Then open **Install a coworker** and add this coworker **any one of three ways**:
+
+| Method | What to do | Notes |
+|---|---|---|
+| **A · GitHub URL** | choose **GitHub URL**, paste `https://github.com/Fighter90/career-ops-coworker`, click **Install** | OpenWorker clones the repo and installs the persona. Works because **`career-ops.md` is the repo's only top-level Markdown file** (OpenWorker treats every root `*.md` as a persona). |
+| **B · .zip** | download **`career-ops-coworker.zip`** from [Releases](https://github.com/Fighter90/career-ops-coworker/releases), then use the **.zip** option | The bundle is just the persona (as `manifest.md`) — OpenWorker's own share format. Rebuild locally with `bash scripts/build-bundle.sh`. |
+| **C · Import / folder** | choose the file and pick **`career-ops.md`** (or point the **folder** option at a local clone) | The classic single-file import; the folder path also works now that the root holds only the persona. |
+
+OpenWorker shows the coworker's **declared capabilities** (`tools: [files, search, shell, todo]`, `requires_folder: true`, recommended connectors) and lands it **disabled pending your consent** — approve it, then open a **Job-Search Coworker** session and choose your `career-ops` folder. Ask, in plain language:
+
+> *"Scan my boards and give me the top 5 fits this week."*
+
+> ⚠️ **Trust note (from OpenWorker):** only install coworkers from sources you can hold accountable — a coworker runs with access to your system. This one ships **no code**; read [`career-ops.md`](../career-ops.md) before installing so you know exactly how it behaves.
 
 ---
 
 ## Deploying & running — full walkthrough
 
-Nothing here is a service you host; the coworker runs **on your machine inside the OpenWorker desktop app**, driving a local `career-ops` project folder. Budget ~15 minutes for a first setup.
+Nothing here is a service you host; the coworker runs **on your machine inside the OpenWorker desktop app**, driving a local `career-ops` project folder. The [one-command installer](#1--one-command-sets-up-everything-the-coworker-drives) does Steps 2–4 for you; this section is the manual version (budget ~15 minutes for a first setup).
 
 ### Step 0 — Prerequisites
 
@@ -38,7 +56,7 @@ Nothing here is a service you host; the coworker runs **on your machine inside t
 |---|---|---|
 | **[OpenWorker](https://openworker.com)** | the desktop app that runs the coworker | openworker.com (macOS / Windows), or run from [source](https://github.com/andrewyng/openworker) |
 | **Node.js ≥ 18** + **npm** | the `career-ops` pipeline + the dashboard are Node programs | [nodejs.org](https://nodejs.org) — check with `node -v` |
-| **git** | to clone the two repos | preinstalled on macOS/Linux; [git-scm.com](https://git-scm.com) on Windows |
+| **git** | to clone the repos | preinstalled on macOS/Linux; [git-scm.com](https://git-scm.com) on Windows |
 | **One model API key** | the coworker's reasoning (scoring, tailoring). Anthropic / OpenAI / Google, **or a fully local [Ollama](https://ollama.com)** | your provider's console; add it **in OpenWorker's model settings**, not here |
 
 > This coworker ships **no code and no keys** — you add the model key to OpenWorker, and the pipeline reads job boards over plain HTTP (no key needed to scan).
@@ -82,17 +100,19 @@ git clone https://github.com/Fighter90/career-ops-ui web-ui
 
 If you keep the dashboard elsewhere, that's fine too — see [**Launch the dashboard**](#launch-the-career-ops-ui-dashboard-from-openworker) below for the `CAREER_OPS_ROOT=` form.
 
-### Step 4 — Import the coworker into OpenWorker
+### Step 4 — Install the coworker into OpenWorker
 
-```bash
-git clone https://github.com/Fighter90/career-ops-coworker
-```
+Pick whichever is easiest — all three land the same persona (see [Install → 2](#2--install-the-coworker-in-openworker) for the details):
 
-In OpenWorker:
+- **GitHub URL** — paste `https://github.com/Fighter90/career-ops-coworker` into **Install a coworker → GitHub URL**.
+- **.zip** — download `career-ops-coworker.zip` from [Releases](https://github.com/Fighter90/career-ops-coworker/releases) and use the **.zip** option.
+- **Import** — clone and pick `career-ops.md`:
+  ```bash
+  git clone https://github.com/Fighter90/career-ops-coworker
+  # OpenWorker → Install a coworker → pick career-ops.md
+  ```
 
-1. **New coworker → Import**, and pick **`career-ops.md`** from the cloned repo.
-2. OpenWorker copies it into its managed install area (a snapshot — later edits to the repo don't change an installed copy; **re-import to update**).
-3. It reads the persona's declared capabilities: `tools: [files, search, shell, todo]`, `requires_folder: true`, and the recommended connectors below.
+OpenWorker copies it into its managed install area (a **snapshot** — later edits to the source don't change an installed copy; **re-install to update**) and reads the persona's declared capabilities: `tools: [files, search, shell, todo]`, `requires_folder: true`, and the recommended connectors below.
 
 ### Step 5 — Grant connectors (optional, each is approved by you)
 
@@ -123,14 +143,14 @@ A typical first session: **scan** → **score fits (0–5)** → you pick one �
 
 ### Updating the coworker
 
-Because install is a **snapshot**, pull the repo and **re-import** `career-ops.md`:
+Because install is a **snapshot**, re-install to pick up changes:
 
 ```bash
-cd career-ops-coworker && git pull
-# then in OpenWorker: New coworker → Import → career-ops.md  (replaces the installed copy)
+# URL/zip: re-run Install a coworker (same URL, or a fresh .zip) — it replaces the snapshot
+# Import:  cd career-ops-coworker && git pull   → re-import career-ops.md
 ```
 
-Update the pipeline + dashboard the same way you would any repo (`git pull && npm install` in `career-ops`, `git pull` in `web-ui`).
+Update the pipeline + dashboard the same way you would any repo (`git pull && npm install` in `career-ops`, `git pull` in `web-ui`). Or just re-run the [one-command installer](#1--one-command-sets-up-everything-the-coworker-drives) — it updates in place.
 
 ### Verify the install
 
@@ -144,40 +164,43 @@ This runs the exact rules OpenWorker's own loader applies (id slug, permission m
 
 | Symptom | Fix |
 |---|---|
+| **URL/folder install errors on a `*.md`** | OpenWorker installs **every** top-level `*.md` in the repo as a persona. This repo keeps `career-ops.md` as the **only** root Markdown file (README/CHANGELOG/CLAUDE live under `.github/` and `docs/`) precisely so the repo installer succeeds — don't add other `.md` files at the root. |
 | **"choose a folder" keeps asking** | the persona is `requires_folder: true` — point it at the `career-ops` directory (the one with `cv.md`). |
 | **Scan returns 0 postings** | check `portals.yml` is valid and the board slug is right; run `node scan.mjs --dry-run` from the folder to see errors. On a full-tunnel VPN, some boards (e.g. hh.ru) 403 — disconnect the VPN while scanning. |
 | **"open the dashboard" fails** | ensure `web-ui/` exists inside the project (Step 3), or pass `CAREER_OPS_ROOT=/path/to/career-ops bash web-ui/bin/start.sh` if it lives elsewhere. |
 | **Model errors / rate limits** | switch or fix the key in **OpenWorker's** settings (not this repo); lower `spend_tier` in `config/profile.yml` to use a cheaper model. |
 | **A tailored CV looks thin** | that's the truthfulness gate working — it won't invent experience. Add the real detail to `cv.md` and re-tailor. |
 
-More in the [full user guide](./help/en.md) (§10 Troubleshooting), in every language.
+More in the [full user guide](../help/en.md) (§10 Troubleshooting), in every language.
 
 ---
 
 ## Documentation
 
-The full user guide lives in **[`help/`](./help/)**, translated into every language the `career-ops-ui` project ships:
+The full user guide lives in **[`help/`](../help/)**, translated into every language the `career-ops-ui` project ships:
 
 | | | | |
 |---|---|---|---|
-| 🇬🇧 [English](./help/en.md) | 🇪🇸 [Español](./help/es.md) | 🇧🇷 [Português](./help/pt-BR.md) | 🇰🇷 [한국어](./help/ko-KR.md) |
-| 🇯🇵 [日本語](./help/ja.md) | 🇷🇺 [Русский](./help/ru.md) | 🇨🇳 [简体中文](./help/zh-CN.md) | 🇹🇼 [繁體中文](./help/zh-TW.md) |
-| 🇫🇷 [Français](./help/fr.md) | 🇵🇱 [Polski](./help/pl.md) | 🇺🇦 [Українська](./help/uk.md) | 🇩🇰 [Dansk](./help/da.md) |
-| 🇸🇦 [العربية](./help/ar.md) | 🇩🇪 [Deutsch](./help/de.md) | 🇮🇹 [Italiano](./help/it.md) | 🇹🇷 [Türkçe](./help/tr.md) |
-| 🇮🇳 [हिन्दी](./help/hi.md) | | | |
+| 🇬🇧 [English](../help/en.md) | 🇪🇸 [Español](../help/es.md) | 🇧🇷 [Português](../help/pt-BR.md) | 🇰🇷 [한국어](../help/ko-KR.md) |
+| 🇯🇵 [日本語](../help/ja.md) | 🇷🇺 [Русский](../help/ru.md) | 🇨🇳 [简体中文](../help/zh-CN.md) | 🇹🇼 [繁體中文](../help/zh-TW.md) |
+| 🇫🇷 [Français](../help/fr.md) | 🇵🇱 [Polski](../help/pl.md) | 🇺🇦 [Українська](../help/uk.md) | 🇩🇰 [Dansk](../help/da.md) |
+| 🇸🇦 [العربية](../help/ar.md) | 🇩🇪 [Deutsch](../help/de.md) | 🇮🇹 [Italiano](../help/it.md) | 🇹🇷 [Türkçe](../help/tr.md) |
+| 🇮🇳 [हिन्दी](../help/hi.md) | | | |
 
-See the [CHANGELOG](./CHANGELOG.md) for version history.
+See the [CHANGELOG](../docs/CHANGELOG.md) for version history.
 
 ---
 
 ## What's in this repo
 
-| File | What it is |
+| Path | What it is |
 |---|---|
-| [`career-ops.md`](./career-ops.md) | **The coworker.** A persona: YAML frontmatter (declared capabilities + recommended connectors) + a system-prompt body. This is what you import into OpenWorker. |
-| [`help/`](./help/) | The user guide, ×17 locales. |
-| [`CHANGELOG.md`](./CHANGELOG.md) | Version history. |
-| [`CLAUDE.md`](./CLAUDE.md) · [`.claude/`](./.claude/) | Guidance + config for editing this repo with Claude Code. |
+| [`career-ops.md`](../career-ops.md) | **The coworker.** A persona: YAML frontmatter (declared capabilities + recommended connectors) + a system-prompt body. **The only top-level `.md`** — so OpenWorker's repo/URL installer picks it up cleanly. |
+| [`install.sh`](../install.sh) | One-command installer — sets up the `career-ops` pipeline + `web-ui` (idempotent, non-destructive) and prints the OpenWorker install steps. |
+| [`help/`](../help/) | The user guide, ×17 locales. |
+| [`scripts/`](../scripts/) | `validate-persona.py` (the loader-rule check CI runs) + `build-bundle.sh` (builds the `.zip`). |
+| [`.github/README.md`](README.md) · [`docs/CHANGELOG.md`](../docs/CHANGELOG.md) · [`docs/CLAUDE.md`](../docs/CLAUDE.md) | This README (GitHub renders it at the repo root), the changelog, and the repo-editing guide — kept **out of the root** so they don't look like personas to OpenWorker's installer. |
+| [`.claude/`](../.claude/) | Config for editing this repo with Claude Code. |
 | `LICENSE` | MIT. |
 
 A coworker is **not code** — OpenWorker runs none of this repo as a program. Per its install note: *"no third-party code runs, but the instructions steer the coworker."*
@@ -230,7 +253,7 @@ It's a **long-running, local-only** server (binds `127.0.0.1`, sends data nowher
 - **Read-only by default.** Scanning and scoring are free; **sending email, changing your calendar, writing outside the project, or overwriting `cv.md` are approval-gated**.
 - **Local & private.** Your CV, salary numbers, and reports stay on your machine; they're never posted to a connector you didn't ask for.
 
-> ⚠️ **Trust note (from OpenWorker):** only install coworkers from sources you can hold accountable — a coworker runs with access to your system. This one ships no code; read [`career-ops.md`](./career-ops.md) before installing so you know exactly how it behaves.
+> ⚠️ **Trust note (from OpenWorker):** only install coworkers from sources you can hold accountable — a coworker runs with access to your system. This one ships no code; read [`career-ops.md`](../career-ops.md) before installing so you know exactly how it behaves.
 
 ---
 
@@ -242,4 +265,4 @@ It's a **long-running, local-only** server (binds `127.0.0.1`, sends data nowher
 
 ## License
 
-MIT — see [LICENSE](./LICENSE). Not affiliated with OpenWorker or Andrew Ng; it targets the OpenWorker coworker format and the open-source `career-ops` project (both MIT).
+MIT — see [LICENSE](../LICENSE). Not affiliated with OpenWorker or Andrew Ng; it targets the OpenWorker coworker format and the open-source `career-ops` project (both MIT).

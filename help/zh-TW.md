@@ -37,6 +37,14 @@
 
 > **新手?** 儲存庫 [README](https://github.com/Fighter90/career-ops-coworker#deploying--running--full-walkthrough) 有完整的分步部署指南(前置條件 → 模型金鑰 → 資料夾 → 連接器 → 首次執行 → 儀表板 → 更新 → 排錯)。本節是精簡版。
 
+**最快 —— 一條命令。** 它準備好 coworker 驅動的流水線（冪等 —— 重用既有的 `career-ops` / `web-ui`），然後印出 OpenWorker 的步驟:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Fighter90/career-ops-coworker/main/install.sh | bash
+```
+
+在 OpenWorker 的 **Install a coworker** 中，用三種方式之一新增: **GitHub URL**(`https://github.com/Fighter90/career-ops-coworker`)、**.zip**(來自 Releases)或 **Import** `career-ops.md` 檔案。三者安裝的是同一個 persona —— 在你同意前處於停用狀態。
+
 1. 取得 `career-ops.md`——複製這個儲存庫，或直接下載這一個檔案。
 2. 在 OpenWorker 中：**New coworker → Import**，然後選擇 `career-ops.md`（或讓 OpenWorker 指向這個儲存庫資料夾）。
 3. 匯入時，檔案會**以快照存入 OpenWorker 的受管理區域**。之後在這個儲存庫中的修改不會變更已安裝的副本——重新匯入即可更新；`version:` 欄位會驅動「replaces vN」提示。

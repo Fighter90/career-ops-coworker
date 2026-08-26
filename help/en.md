@@ -36,6 +36,14 @@ A complete guide to installing and running the **career-ops** coworker inside **
 
 > **New here?** The repo [README](https://github.com/Fighter90/career-ops-coworker#deploying--running--full-walkthrough) has a full step-by-step deployment walkthrough (prerequisites → model key → folder → connectors → first run → dashboard → updating → troubleshooting). This section is the short version.
 
+**Fastest — one command.** It sets up the pipeline the coworker drives (idempotent — it reuses an existing `career-ops` / `web-ui`), then prints the OpenWorker steps:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Fighter90/career-ops-coworker/main/install.sh | bash
+```
+
+In OpenWorker's **Install a coworker**, add it any of three ways: **GitHub URL** (`https://github.com/Fighter90/career-ops-coworker`), **.zip** (from Releases), or **Import** the `career-ops.md` file. All three land the same persona — disabled pending your consent.
+
 1. Get `career-ops.md` — clone this repo or download the single file.
 2. In OpenWorker: **New coworker → Import**, and pick `career-ops.md` (or point OpenWorker at this repo folder).
 3. On import the file is **snapshotted into OpenWorker's managed area**. Later edits in this repo do not change an installed copy — re-import to update; the `version:` field drives the "replaces vN" note.

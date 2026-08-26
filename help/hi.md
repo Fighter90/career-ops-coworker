@@ -37,6 +37,14 @@ OpenWorker जोड़ने से पहले इस फ़ोल्डर �
 
 > **यहाँ नए हैं?** रेपो के [README](https://github.com/Fighter90/career-ops-coworker#deploying--running--full-walkthrough) में पूरा चरण-दर-चरण डिप्लॉयमेंट है (पूर्वापेक्षाएँ → मॉडल कुंजी → फ़ोल्डर → कनेक्टर → पहला रन → डैशबोर्ड → अपडेट → समस्या निवारण)। यह अनुभाग संक्षिप्त संस्करण है।
 
+**सबसे तेज़ — एक कमांड।** यह coworker द्वारा चलाई जाने वाली पाइपलाइन तैयार करता है (idempotent — मौजूदा `career-ops` / `web-ui` को फिर से उपयोग करता है), फिर OpenWorker के चरण प्रिंट करता है:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Fighter90/career-ops-coworker/main/install.sh | bash
+```
+
+OpenWorker के **Install a coworker** में इसे तीन तरीकों में से किसी एक से जोड़ें: **GitHub URL** (`https://github.com/Fighter90/career-ops-coworker`), **.zip** (Releases से), या `career-ops.md` फ़ाइल **Import**। तीनों एक ही persona इंस्टॉल करते हैं — आपकी सहमति तक निष्क्रिय।
+
 1. `career-ops.md` प्राप्त करें — इस रिपॉज़िटरी को क्लोन करें या केवल यह एक फ़ाइल डाउनलोड करें।
 2. OpenWorker में: **New coworker → Import**, और `career-ops.md` चुनें (या OpenWorker को इस रिपॉज़िटरी फ़ोल्डर की ओर इंगित करें)।
 3. इम्पोर्ट के समय फ़ाइल का **OpenWorker के प्रबंधित क्षेत्र में स्नैपशॉट ले लिया जाता है**। इस रिपॉज़िटरी में बाद की गई एडिट्स किसी इंस्टॉल की गई प्रति को नहीं बदलतीं — अपडेट करने के लिए फिर से इम्पोर्ट करें; `version:` फ़ील्ड "replaces vN" नोट को नियंत्रित करता है।

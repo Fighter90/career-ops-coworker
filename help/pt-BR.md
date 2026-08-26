@@ -37,6 +37,14 @@ Rode `node scan.mjs --dry-run` desta pasta uma vez para confirmar que traz vagas
 
 > **Novo por aqui?** O [README](https://github.com/Fighter90/career-ops-coworker#deploying--running--full-walkthrough) do repo tem um passo a passo completo de implantação (pré-requisitos → chave do modelo → pasta → conectores → primeira execução → painel → atualização → solução de problemas). Esta seção é a versão curta.
 
+**Mais rápido — um comando.** Prepara o pipeline que o coworker conduz (idempotente — reutiliza um `career-ops` / `web-ui` existente) e então mostra os passos do OpenWorker:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Fighter90/career-ops-coworker/main/install.sh | bash
+```
+
+No **Install a coworker** do OpenWorker, adicione de três formas: **GitHub URL** (`https://github.com/Fighter90/career-ops-coworker`), **.zip** (das Releases) ou **Import** do arquivo `career-ops.md`. As três instalam a mesma persona — desativada aguardando seu consentimento.
+
 1. Obtenha `career-ops.md` — clone este repositório ou baixe o arquivo único.
 2. No OpenWorker: **New coworker → Import** e selecione `career-ops.md` (ou aponte o OpenWorker para a pasta deste repositório).
 3. Na importação, o arquivo é **capturado como snapshot na área gerenciada do OpenWorker**. Edições posteriores neste repositório não alteram uma cópia instalada — reimporte para atualizar; o campo `version:` controla a nota "replaces vN".
