@@ -110,6 +110,12 @@ It's a **long-running, local-only** server (binds `127.0.0.1`, sends data nowher
 
 ---
 
+## Related projects & links
+
+- **OpenWorker** — the host app this coworker runs in: [openworker.com](https://openworker.com) · [roster](https://openworker.com/#roster) · [github.com/andrewyng/openworker](https://github.com/andrewyng/openworker)
+- **career-ops** — the job-search engine this coworker drives: [github.com/santifer/career-ops](https://github.com/santifer/career-ops) · [career-ops.org](https://career-ops.org)
+- **career-ops-ui** — the dashboard this coworker can launch: [github.com/Fighter90/career-ops-ui](https://github.com/Fighter90/career-ops-ui) · [cvstart.org](https://cvstart.org) · [wiki](https://github.com/Fighter90/career-ops-ui/wiki)
+
 ## License
 
 MIT — see [LICENSE](./LICENSE). Not affiliated with OpenWorker or Andrew Ng; it targets the OpenWorker coworker format and the open-source `career-ops` project (both MIT).
