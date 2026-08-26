@@ -20,7 +20,22 @@ Un guide complet pour installer et lancer le coworker **career-ops** dans **[Ope
    ```
    Le coworker opère *à l'intérieur* de ce dossier et lit/écrit `cv.md`, `config/profile.yml`, `config/two-pager.yml`, `portals.yml`, `data/applications.md` et `reports/`.
 
+**Les fichiers à configurer** (schéma complet dans le [README de `career-ops`](https://github.com/Fighter90/career-ops)) :
+
+| Fichier | Quoi y mettre |
+|---|---|
+| `cv.md` | votre vrai CV en Markdown — la seule source de vérité sur laquelle le coworker s’appuie (il n’invente rien au-delà). |
+| `config/profile.yml` | rôles visés, séniorité, localisations, préférence télétravail, salaire et `spend_tier` (contrôle le coût du modèle). |
+| `portals.yml` | les tableaux à scanner — un slug d’entreprise Greenhouse/Lever/Ashby, ou une entrée globale comme `{ name: Torre, provider: torre, search: "engineering manager", enabled: true }`. |
+| `config/two-pager.yml` *(optionnel)* | goûts / indispensables / rédhibitoires qui affinent le score d’adéquation. |
+
+Lancez `node scan.mjs --dry-run` depuis ce dossier une fois pour confirmer qu’il ramène des offres avant de brancher OpenWorker.
+
+**(optionnel)** clonez [`career-ops-ui`](https://github.com/Fighter90/career-ops-ui) dans `career-ops/web-ui/` pour que *« ouvre le tableau de bord »* fonctionne (voir §6).
+
 ## 3. Install the coworker into OpenWorker
+
+> **Nouveau ici ?** Le [README](https://github.com/Fighter90/career-ops-coworker#deploying--running--full-walkthrough) du dépôt propose un parcours de déploiement pas à pas complet (prérequis → clé du modèle → dossier → connecteurs → première exécution → tableau de bord → mise à jour → dépannage). Cette section est la version courte.
 
 1. Récupérez `career-ops.md` — clonez ce dépôt ou téléchargez le fichier unique.
 2. Dans OpenWorker : **New coworker → Import**, puis sélectionnez `career-ops.md` (ou indiquez à OpenWorker le dossier de ce dépôt).

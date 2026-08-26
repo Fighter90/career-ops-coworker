@@ -20,7 +20,22 @@
    ```
    coworker 在这个文件夹 *内部* 运作，读取/写入 `cv.md`、`config/profile.yml`、`config/two-pager.yml`、`portals.yml`、`data/applications.md` 和 `reports/`。
 
+**你需要配置的文件**(完整结构见 [`career-ops` README](https://github.com/Fighter90/career-ops)):
+
+| 文件 | 填什么 |
+|---|---|
+| `cv.md` | Markdown 格式的真实简历 —— coworker 依据的唯一事实来源(它不会超出此范围臆造)。 |
+| `config/profile.yml` | 目标岗位、级别、地点、远程偏好、薪资以及 `spend_tier`(控制模型成本)。 |
+| `portals.yml` | 要扫描的招聘板 —— Greenhouse/Lever/Ashby 的公司 slug,或整板条目如 `{ name: Torre, provider: torre, search: "engineering manager", enabled: true }`。 |
+| `config/two-pager.yml` *(可选)* | 偏好/必须/雷区,用于细化匹配打分。 |
+
+在接入 OpenWorker 前,先在该文件夹运行一次 `node scan.mjs --dry-run`,确认能拉取到职位。
+
+**(可选)** 将 [`career-ops-ui`](https://github.com/Fighter90/career-ops-ui) 克隆到 `career-ops/web-ui/`,让*"打开仪表板"*可用(见 §6)。
+
 ## 3. Install the coworker into OpenWorker
+
+> **新手?** 仓库 [README](https://github.com/Fighter90/career-ops-coworker#deploying--running--full-walkthrough) 有完整的分步部署指南(前置条件 → 模型密钥 → 文件夹 → 连接器 → 首次运行 → 仪表板 → 更新 → 排错)。本节是精简版。
 
 1. 获取 `career-ops.md`——克隆此仓库或下载这一个文件。
 2. 在 OpenWorker 中：**New coworker → Import**，然后选择 `career-ops.md`（或将 OpenWorker 指向此仓库文件夹）。

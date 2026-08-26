@@ -20,7 +20,22 @@
    ```
    coworker는 이 폴더 *안에서* 동작하며 `cv.md`, `config/profile.yml`, `config/two-pager.yml`, `portals.yml`, `data/applications.md`, `reports/`를 읽고 씁니다.
 
+**설정하는 파일** (전체 스키마는 [`career-ops` README](https://github.com/Fighter90/career-ops)):
+
+| 파일 | 무엇을 넣나 |
+|---|---|
+| `cv.md` | 마크다운으로 된 실제 이력서 — coworker가 근거로 삼는 유일한 출처(이 이상을 지어내지 않음). |
+| `config/profile.yml` | 목표 직무, 연차, 지역, 원격 선호, 급여, `spend_tier`(모델 비용 제어). |
+| `portals.yml` | 스캔할 채용 보드 — Greenhouse/Lever/Ashby 회사 슬러그, 또는 `{ name: Torre, provider: torre, search: "engineering manager", enabled: true }` 같은 보드 전체 항목. |
+| `config/two-pager.yml` *(선택)* | 적합도 점수를 다듬는 선호/필수/불가 요소. |
+
+OpenWorker에 연결하기 전에 이 폴더에서 `node scan.mjs --dry-run`을 한 번 실행해 공고를 가져오는지 확인하세요.
+
+**(선택)** *"대시보드 열기"*가 작동하도록 [`career-ops-ui`](https://github.com/Fighter90/career-ops-ui)를 `career-ops/web-ui/`에 클론하세요(§6 참고).
+
 ## 3. Install the coworker into OpenWorker
+
+> **처음이신가요?** 저장소 [README](https://github.com/Fighter90/career-ops-coworker#deploying--running--full-walkthrough)에 전체 배포 단계별 안내가 있습니다(사전 준비 → 모델 키 → 폴더 → 커넥터 → 첫 실행 → 대시보드 → 업데이트 → 문제 해결). 이 절은 요약본입니다.
 
 1. `career-ops.md`를 받으세요 — 이 저장소를 클론하거나 단일 파일을 다운로드하세요.
 2. OpenWorker에서: **New coworker → Import**를 선택하고 `career-ops.md`를 고르세요(또는 OpenWorker가 이 저장소 폴더를 가리키도록 하세요).

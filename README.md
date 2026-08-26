@@ -10,23 +10,147 @@ It's a thin, **code-free** steering layer over the open-source **[`career-ops`](
 
 ---
 
-## Quick start
+## Quick start (TL;DR)
 
 ```bash
-# 1. Get the OpenWorker app + a model key
-#    → https://openworker.com   (macOS / Windows, or run from source)
-
-# 2. Get a career-ops project folder (your data lives here)
-git clone https://github.com/Fighter90/career-ops
-#    → set up cv.md, config/profile.yml, portals.yml per that repo's README
-
-# 3. Get this coworker
+# 1. Install OpenWorker + add a model key   → https://openworker.com
+# 2. Clone the pipeline (your data lives here) and install its deps
+git clone https://github.com/Fighter90/career-ops && cd career-ops && npm install
+# 3. Add the dashboard (optional) so "open the dashboard" works
+git clone https://github.com/Fighter90/career-ops-ui web-ui
+# 4. Clone this coworker
 git clone https://github.com/Fighter90/career-ops-coworker
 ```
 
-Then in OpenWorker: **New coworker → Import** → pick `career-ops.md`, open a **Job-Search Coworker** session, choose your `career-ops` folder, and ask:
+In OpenWorker: **New coworker → Import** → pick `career-ops.md` → open a **Job-Search Coworker** session → choose your `career-ops` folder → ask *"Scan my boards and give me the top 5 fits this week."*
 
-> *"Scan my boards and give me the top 5 fits this week."* · *"Tailor my CV for this posting: <URL>."* · *"Who needs a follow-up — draft them."* · *"Open the dashboard."*
+**New here? Follow the full walkthrough below** — it explains every step, the folder layout, connectors, and how to launch the dashboard.
+
+---
+
+## Deploying & running — full walkthrough
+
+Nothing here is a service you host; the coworker runs **on your machine inside the OpenWorker desktop app**, driving a local `career-ops` project folder. Budget ~15 minutes for a first setup.
+
+### Step 0 — Prerequisites
+
+| Need | Why | Get it |
+|---|---|---|
+| **[OpenWorker](https://openworker.com)** | the desktop app that runs the coworker | openworker.com (macOS / Windows), or run from [source](https://github.com/andrewyng/openworker) |
+| **Node.js ≥ 18** + **npm** | the `career-ops` pipeline + the dashboard are Node programs | [nodejs.org](https://nodejs.org) — check with `node -v` |
+| **git** | to clone the two repos | preinstalled on macOS/Linux; [git-scm.com](https://git-scm.com) on Windows |
+| **One model API key** | the coworker's reasoning (scoring, tailoring). Anthropic / OpenAI / Google, **or a fully local [Ollama](https://ollama.com)** | your provider's console; add it **in OpenWorker's model settings**, not here |
+
+> This coworker ships **no code and no keys** — you add the model key to OpenWorker, and the pipeline reads job boards over plain HTTP (no key needed to scan).
+
+### Step 1 — Install OpenWorker and add a model key
+
+1. Install OpenWorker from [openworker.com](https://openworker.com) and open it.
+2. In its **model / API-key settings**, paste a key for one provider (Anthropic, OpenAI, or Google), **or** point it at a local **Ollama** if you want to run entirely offline.
+3. Confirm OpenWorker can reach the model (it shows the active model in the session header).
+
+### Step 2 — Set up the `career-ops` project folder (your data)
+
+This folder is where **your CV, job boards, and results live** — it never leaves your machine.
+
+```bash
+git clone https://github.com/Fighter90/career-ops
+cd career-ops
+npm install                       # installs the pipeline's dependencies
+cp .env.example .env              # optional: only if you'll run live LLM evals from the CLI too
+```
+
+Then create/edit three files (see the [`career-ops` README](https://github.com/Fighter90/career-ops) for the full schema):
+
+| File | What to put in it |
+|---|---|
+| **`cv.md`** | your real CV in Markdown — the single source of truth the coworker is grounded in (it will **never** invent facts beyond this). |
+| **`config/profile.yml`** | target roles, seniority, locations, remote preference, salary expectation, `spend_tier` (controls model cost). |
+| **`portals.yml`** | the job boards to scan. Start from the examples — e.g. a Greenhouse/Lever/Ashby company slug, or a board-wide entry like `{ name: Torre, provider: torre, search: "engineering manager", enabled: true }`. |
+| *(optional)* **`config/two-pager.yml`** | a candidate "two-pager" (loves / must-haves / deal-breakers) that sharpens fit scoring. |
+
+> **Tip:** run `node scan.mjs --dry-run` once from this folder to confirm it pulls postings before wiring up OpenWorker.
+
+### Step 3 — (Optional) add the dashboard so "open the dashboard" works
+
+The coworker can launch the **[`career-ops-ui`](https://github.com/Fighter90/career-ops-ui)** web dashboard. It expects it at `career-ops/web-ui/`:
+
+```bash
+# from inside your career-ops folder:
+git clone https://github.com/Fighter90/career-ops-ui web-ui
+```
+
+If you keep the dashboard elsewhere, that's fine too — see [**Launch the dashboard**](#launch-the-career-ops-ui-dashboard-from-openworker) below for the `CAREER_OPS_ROOT=` form.
+
+### Step 4 — Import the coworker into OpenWorker
+
+```bash
+git clone https://github.com/Fighter90/career-ops-coworker
+```
+
+In OpenWorker:
+
+1. **New coworker → Import**, and pick **`career-ops.md`** from the cloned repo.
+2. OpenWorker copies it into its managed install area (a snapshot — later edits to the repo don't change an installed copy; **re-import to update**).
+3. It reads the persona's declared capabilities: `tools: [files, search, shell, todo]`, `requires_folder: true`, and the recommended connectors below.
+
+### Step 5 — Grant connectors (optional, each is approved by you)
+
+The persona **recommends** three connectors; grant only what you want. Reads are free; **anything consequential is approval-gated**.
+
+| Connector | Enables | Tier |
+|---|---|---|
+| **Gmail** | read recruiter replies; **draft** follow-up / thank-you emails (sending asks first) | core |
+| **Google Calendar** | place interview slots + prep reminders (asks first) | core |
+| **GitHub** | back CV bullets with your public projects / publications | optional |
+
+You can skip all three and still scan, score, tailor, and track — those need only the folder.
+
+### Step 6 — Open a session and pick your folder
+
+1. Open a **Job-Search Coworker** session in OpenWorker.
+2. When it asks for a folder (`requires_folder: true`), choose your **`career-ops`** directory.
+3. You're ready. Try, in plain language:
+
+> *"Scan my boards and give me the top 5 fits this week."*
+> *"Tailor my CV for this posting: `<URL>` and write a cover letter."*
+> *"Who's waiting on a reply — draft follow-ups."*
+> *"Open the dashboard."*
+
+### Step 7 — First run, end to end
+
+A typical first session: **scan** → **score fits (0–5)** → you pick one → **tailor** a grounded CV + cover letter (files written into the project) → **track** the application → **draft** a follow-up when a reply lands. Every send/write/CV-overwrite pauses for your approval; nothing is fabricated.
+
+### Updating the coworker
+
+Because install is a **snapshot**, pull the repo and **re-import** `career-ops.md`:
+
+```bash
+cd career-ops-coworker && git pull
+# then in OpenWorker: New coworker → Import → career-ops.md  (replaces the installed copy)
+```
+
+Update the pipeline + dashboard the same way you would any repo (`git pull && npm install` in `career-ops`, `git pull` in `web-ui`).
+
+### Verify the install
+
+```bash
+python3 scripts/validate-persona.py    # → "INSTALLABLE ✓" (needs: pip install pyyaml)
+```
+
+This runs the exact rules OpenWorker's own loader applies (id slug, permission mode, catalog tool ids, `recommends ⊆ connectors`). CI runs it on every push, plus a 17-locale help-parity check.
+
+### Troubleshooting
+
+| Symptom | Fix |
+|---|---|
+| **"choose a folder" keeps asking** | the persona is `requires_folder: true` — point it at the `career-ops` directory (the one with `cv.md`). |
+| **Scan returns 0 postings** | check `portals.yml` is valid and the board slug is right; run `node scan.mjs --dry-run` from the folder to see errors. On a full-tunnel VPN, some boards (e.g. hh.ru) 403 — disconnect the VPN while scanning. |
+| **"open the dashboard" fails** | ensure `web-ui/` exists inside the project (Step 3), or pass `CAREER_OPS_ROOT=/path/to/career-ops bash web-ui/bin/start.sh` if it lives elsewhere. |
+| **Model errors / rate limits** | switch or fix the key in **OpenWorker's** settings (not this repo); lower `spend_tier` in `config/profile.yml` to use a cheaper model. |
+| **A tailored CV looks thin** | that's the truthfulness gate working — it won't invent experience. Add the real detail to `cv.md` and re-tailor. |
+
+More in the [full user guide](./help/en.md) (§10 Troubleshooting), in every language.
 
 ---
 

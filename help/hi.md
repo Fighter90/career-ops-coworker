@@ -20,7 +20,22 @@
    ```
    coworker इस फ़ोल्डर के *भीतर* काम करता है और `cv.md`, `config/profile.yml`, `config/two-pager.yml`, `portals.yml`, `data/applications.md`, और `reports/` को पढ़ता/लिखता है।
 
+**जो फ़ाइलें आप सेट करते हैं** (पूरा स्कीमा [`career-ops` README](https://github.com/Fighter90/career-ops) में):
+
+| फ़ाइल | क्या रखें |
+|---|---|
+| `cv.md` | Markdown में आपका असली CV — coworker जिस पर आधारित है वह एकमात्र सत्य-स्रोत (इससे आगे कुछ नहीं गढ़ता)। |
+| `config/profile.yml` | लक्षित भूमिकाएँ, वरिष्ठता, स्थान, रिमोट वरीयता, वेतन और `spend_tier` (मॉडल लागत नियंत्रित करता है)। |
+| `portals.yml` | स्कैन करने के लिए बोर्ड — Greenhouse/Lever/Ashby का कंपनी slug, या पूरे-बोर्ड की प्रविष्टि जैसे `{ name: Torre, provider: torre, search: "engineering manager", enabled: true }`। |
+| `config/two-pager.yml` *(वैकल्पिक)* | पसंद / अनिवार्य / डील-ब्रेकर — जो फ़िट स्कोरिंग को पैना करते हैं। |
+
+OpenWorker जोड़ने से पहले इस फ़ोल्डर से एक बार `node scan.mjs --dry-run` चलाकर पुष्टि करें कि पोस्टिंग आ रही हैं।
+
+**(वैकल्पिक)** *"डैशबोर्ड खोलो"* काम करे इसके लिए [`career-ops-ui`](https://github.com/Fighter90/career-ops-ui) को `career-ops/web-ui/` में क्लोन करें (§6 देखें)।
+
 ## 3. Install the coworker into OpenWorker
+
+> **यहाँ नए हैं?** रेपो के [README](https://github.com/Fighter90/career-ops-coworker#deploying--running--full-walkthrough) में पूरा चरण-दर-चरण डिप्लॉयमेंट है (पूर्वापेक्षाएँ → मॉडल कुंजी → फ़ोल्डर → कनेक्टर → पहला रन → डैशबोर्ड → अपडेट → समस्या निवारण)। यह अनुभाग संक्षिप्त संस्करण है।
 
 1. `career-ops.md` प्राप्त करें — इस रिपॉज़िटरी को क्लोन करें या केवल यह एक फ़ाइल डाउनलोड करें।
 2. OpenWorker में: **New coworker → Import**, और `career-ops.md` चुनें (या OpenWorker को इस रिपॉज़िटरी फ़ोल्डर की ओर इंगित करें)।

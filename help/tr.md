@@ -20,7 +20,22 @@
    ```
    Coworker bu klasörün *içinde* çalışır ve `cv.md`, `config/profile.yml`, `config/two-pager.yml`, `portals.yml`, `data/applications.md` ve `reports/` dosyalarını okur/yazar.
 
+**Kuracağın dosyalar** (tam şema [`career-ops` README](https://github.com/Fighter90/career-ops)):
+
+| Dosya | İçine ne konur |
+|---|---|
+| `cv.md` | Markdown biçiminde gerçek özgeçmişin — coworker’ın dayandığı tek doğruluk kaynağı (bunun ötesinde uydurmaz). |
+| `config/profile.yml` | hedef roller, kıdem, lokasyonlar, uzaktan tercihi, maaş ve `spend_tier` (model maliyetini denetler). |
+| `portals.yml` | taranacak ilan panoları — bir Greenhouse/Lever/Ashby şirket slug’ı ya da `{ name: Torre, provider: torre, search: "engineering manager", enabled: true }` gibi pano geneli bir giriş. |
+| `config/two-pager.yml` *(isteğe bağlı)* | sevdiklerin / olmazsa olmazlar / anlaşma bozanlar — uygunluk puanını keskinleştirir. |
+
+OpenWorker’a bağlamadan önce bu klasörden bir kez `node scan.mjs --dry-run` çalıştırıp ilan çektiğini doğrula.
+
+**(isteğe bağlı)** *"panoyu aç"* çalışsın diye [`career-ops-ui`](https://github.com/Fighter90/career-ops-ui)’i `career-ops/web-ui/` içine klonla (bkz. §6).
+
 ## 3. Install the coworker into OpenWorker
+
+> **Yeni misin?** Deponun [README](https://github.com/Fighter90/career-ops-coworker#deploying--running--full-walkthrough) dosyasında tam adım adım dağıtım rehberi var (ön koşullar → model anahtarı → klasör → bağlayıcılar → ilk çalıştırma → pano → güncelleme → sorun giderme). Bu bölüm kısa sürümdür.
 
 1. `career-ops.md` dosyasını edinin — bu depoyu klonlayın veya tek dosyayı indirin.
 2. OpenWorker'da: **New coworker → Import** ve `career-ops.md` dosyasını seçin (veya OpenWorker'ı bu depo klasörüne yönlendirin).

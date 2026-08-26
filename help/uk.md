@@ -20,7 +20,22 @@
    ```
    Coworker працює *всередині* цієї папки та читає/пише `cv.md`, `config/profile.yml`, `config/two-pager.yml`, `portals.yml`, `data/applications.md` та `reports/`.
 
+**Файли, які ви налаштовуєте** (повна схема в [README `career-ops`](https://github.com/Fighter90/career-ops)):
+
+| Файл | Що покласти |
+|---|---|
+| `cv.md` | ваше справжнє резюме у Markdown — єдине джерело істини, на яке спирається coworker (понад це він нічого не вигадує). |
+| `config/profile.yml` | цільові ролі, грейд, локації, перевага щодо віддаленої роботи, зарплата та `spend_tier` (керує вартістю моделі). |
+| `portals.yml` | дошки для сканування — слаг компанії в Greenhouse/Lever/Ashby або запис на всю дошку, як-от `{ name: Torre, provider: torre, search: "engineering manager", enabled: true }`. |
+| `config/two-pager.yml` *(необовʼязково)* | подобається / обовʼязково / стоп-фактори — уточнюють оцінку відповідності. |
+
+Запустіть `node scan.mjs --dry-run` із цієї теки один раз, щоб переконатися, що вакансії підтягуються, перш ніж підключати OpenWorker.
+
+**(необовʼязково)** клонуйте [`career-ops-ui`](https://github.com/Fighter90/career-ops-ui) у `career-ops/web-ui/`, щоб працювала команда *«відкрий дашборд»* (див. §6).
+
 ## 3. Install the coworker into OpenWorker
+
+> **Уперше тут?** У [README](https://github.com/Fighter90/career-ops-coworker#deploying--running--full-walkthrough) репозиторію є повний покроковий розбір розгортання (вимоги → ключ моделі → тека → конектори → перший запуск → дашборд → оновлення → усунення проблем). Цей розділ — коротка версія.
 
 1. Отримайте `career-ops.md` — клонуйте цей репозиторій або завантажте один файл.
 2. В OpenWorker: **New coworker → Import** і виберіть `career-ops.md` (або вкажіть OpenWorker на папку цього репозиторію).

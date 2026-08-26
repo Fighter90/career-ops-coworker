@@ -20,7 +20,22 @@
    ```
    يعمل الـ coworker *داخل* هذا المجلد ويقرأ/يكتب `cv.md` و`config/profile.yml` و`config/two-pager.yml` و`portals.yml` و`data/applications.md` و`reports/`.
 
+**الملفات التي تُعدّها** (المخطّط الكامل في [README الخاص بـ `career-ops`](https://github.com/Fighter90/career-ops)):
+
+| الملف | ما تضعه |
+|---|---|
+| `cv.md` | سيرتك الذاتية الحقيقية بصيغة Markdown — المصدر الوحيد للحقيقة الذي يستند إليه الـ coworker (لا يختلق شيئًا بعده). |
+| `config/profile.yml` | الأدوار المستهدفة، والأقدمية، والمواقع، وتفضيل العمل عن بُعد، والراتب، و`spend_tier` (يتحكّم بتكلفة النموذج). |
+| `portals.yml` | لوحات الوظائف للمسح — سلَج شركة في Greenhouse/Lever/Ashby، أو مُدخل للوحة كاملة مثل `{ name: Torre, provider: torre, search: "engineering manager", enabled: true }`. |
+| `config/two-pager.yml` *(اختياري)* | ما تحب / ما لا غنى عنه / موانع — تصقل تقييم الملاءمة. |
+
+شغّل `node scan.mjs --dry-run` من هذا المجلد مرة واحدة للتأكّد من جلب الإعلانات قبل ربط OpenWorker.
+
+**(اختياري)** استنسخ [`career-ops-ui`](https://github.com/Fighter90/career-ops-ui) إلى `career-ops/web-ui/` كي تعمل *«افتح اللوحة»* (انظر §6).
+
 ## 3. Install the coworker into OpenWorker
+
+> **جديد هنا؟** يحتوي [README](https://github.com/Fighter90/career-ops-coworker#deploying--running--full-walkthrough) المستودع على شرح كامل خطوة بخطوة للنشر (المتطلبات ← مفتاح النموذج ← المجلد ← الموصّلات ← أول تشغيل ← اللوحة ← التحديث ← معالجة المشكلات). هذا القسم هو النسخة المختصرة.
 
 1. احصل على `career-ops.md` — استنسخ هذا المستودع أو نزّل الملف المفرد.
 2. في OpenWorker: **New coworker → Import**، ثم اختر `career-ops.md` (أو وجّه OpenWorker إلى مجلد هذا المستودع).

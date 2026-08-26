@@ -20,7 +20,22 @@
    ```
    coworker はこのフォルダーの *内部* で動作し、`cv.md`、`config/profile.yml`、`config/two-pager.yml`、`portals.yml`、`data/applications.md`、`reports/` を読み書きします。
 
+**設定するファイル**（完全なスキーマは [`career-ops` README](https://github.com/Fighter90/career-ops)）:
+
+| ファイル | 入れる内容 |
+|---|---|
+| `cv.md` | Markdown 形式のあなたの実際の CV — coworker が根拠とする唯一の情報源（これを超えて作り話をしません）。 |
+| `config/profile.yml` | 対象ロール、シニアリティ、勤務地、リモート希望、給与、`spend_tier`（モデルコストを制御）。 |
+| `portals.yml` | スキャンする求人ボード — Greenhouse/Lever/Ashby の会社スラッグ、または `{ name: Torre, provider: torre, search: "engineering manager", enabled: true }` のようなボード全体エントリー。 |
+| `config/two-pager.yml` *(任意)* | 適合度スコアを研ぎ澄ます 好み/必須/NG 要素。 |
+
+OpenWorker に接続する前に、このフォルダーで `node scan.mjs --dry-run` を一度実行し、求人を取得できるか確認してください。
+
+**(任意)** *「ダッシュボードを開いて」*が動くよう、[`career-ops-ui`](https://github.com/Fighter90/career-ops-ui) を `career-ops/web-ui/` にクローンしてください（§6 参照）。
+
 ## 3. Install the coworker into OpenWorker
+
+> **はじめての方へ:** リポジトリの [README](https://github.com/Fighter90/career-ops-coworker#deploying--running--full-walkthrough) に、デプロイの完全なステップバイステップ（前提 → モデルキー → フォルダー → コネクター → 初回実行 → ダッシュボード → 更新 → トラブルシューティング）があります。この節は短縮版です。
 
 1. `career-ops.md` を入手します — このリポジトリをクローンするか、単一ファイルをダウンロードします。
 2. OpenWorker で **New coworker → Import** を開き、`career-ops.md` を選びます（または OpenWorker にこのリポジトリのフォルダーを指定します）。

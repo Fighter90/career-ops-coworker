@@ -2,6 +2,14 @@
 
 All notable changes to **career-ops-coworker** are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project adheres to [Semantic Versioning](https://semver.org/). The coworker's own `version:` (in `career-ops.md` frontmatter) tracks the major line — OpenWorker shows it as the "replaces vN" note on re-import.
 
+## [1.2.0] — 2026-08-26
+
+Documentation — a full deployment walkthrough.
+
+### Added
+- **README: "Deploying & running — full walkthrough"** — a detailed step-by-step guide (prerequisites → install OpenWorker + model key → set up the `career-ops` folder with a concrete `cv.md` / `config/profile.yml` / `portals.yml` schema table → optional dashboard → import the coworker → grant connectors → open a session → first run → updating → verify → troubleshooting). The old Quick start is kept as a TL;DR that links here.
+- **Help guide ×17: the files you set up.** Section 2 now carries a `cv.md` / `config/profile.yml` / `portals.yml` / `config/two-pager.yml` schema table (translated in all 17 locales), and section 3 links to the README's full walkthrough. Heading structure unchanged — the 17-locale parity gate stays green.
+
 ## [1.1.0] — 2026-08-26
 
 Hardening — install cleanly and stay green.
