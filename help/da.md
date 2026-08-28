@@ -114,6 +114,6 @@ Coworkeren erklærer `scheduling: true`, så du kan opsætte tilbagevendende kø
 ## 12. FAQ
 
 - **Skal mine data ligge i skyen?** Nej. Alt er lokalt; kun din valgte model og dine connectors ser overhovedet noget, og kun det, du godkender.
-- **Hvilke modeller fungerer bedst?** Stærke modeller til tool-calling (frontmatteren anbefaler `anthropic:claude-opus-4-8` og `openai:gpt-5.5`); en kapabel lokal model via Ollama fungerer også.
+- **Hvilke modeller fungerer bedst?** Stærke modeller til tool-calling (frontmatteren anbefaler `anthropic:claude-opus-5` og `openai:gpt-5.5`); en kapabel lokal model via Ollama fungerer også.
 - **Kan den søge job for mig?** Den forbereder alt — det tilpassede CV, følgebrevet, rækken i trackeren, opfølgningen — men enhver udadgående handling (en afsendelse) er din at godkende. Det er en coworker, ikke en autopilot.
 - **Er dette tilknyttet OpenWorker?** Nej. Det er rettet mod OpenWorker-coworker-formatet og open source-projektet `career-ops`; begge er MIT-licenserede.

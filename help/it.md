@@ -114,6 +114,6 @@ Il coworker dichiara `scheduling: true`, quindi puoi impostare esecuzioni ricorr
 ## 12. FAQ
 
 - **Servono i miei dati nel cloud?** No. Tutto è locale; solo il modello e i connettori che hai scelto vedono qualcosa, e solo ciò che approvi.
-- **Quali modelli funzionano meglio?** Modelli forti nel tool-calling (il frontmatter raccomanda `anthropic:claude-opus-4-8` e `openai:gpt-5.5`); funziona bene anche un modello locale capace tramite Ollama.
+- **Quali modelli funzionano meglio?** Modelli forti nel tool-calling (il frontmatter raccomanda `anthropic:claude-opus-5` e `openai:gpt-5.5`); funziona bene anche un modello locale capace tramite Ollama.
 - **Può candidarsi alle offerte al posto mio?** Prepara tutto — il CV adattato, la lettera di presentazione, la riga del tracker, il follow-up — ma ogni azione verso l'esterno (un invio) spetta a te approvarla. È un coworker, non un pilota automatico.
 - **È affiliato a OpenWorker?** No. Punta al formato coworker di OpenWorker e al progetto open-source `career-ops`; entrambi sono con licenza MIT.

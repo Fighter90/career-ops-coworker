@@ -114,6 +114,6 @@ coworker 宣告了 `scheduling: true`，因此你可以在 OpenWorker 中設定�
 ## 12. FAQ
 
 - **它需要把我的資料放到雲端嗎？**不需要。一切都在本機；只有你所選擇的模型與連接器會看到任何內容，而且僅限你所核准的部分。
-- **哪些模型效果最好？**具備強大 tool-calling 能力的模型（frontmatter 建議 `anthropic:claude-opus-4-8` 與 `openai:gpt-5.5`）；透過 Ollama 使用的高效能本機模型同樣可行。
+- **哪些模型效果最好？**具備強大 tool-calling 能力的模型（frontmatter 建議 `anthropic:claude-opus-5` 與 `openai:gpt-5.5`）；透過 Ollama 使用的高效能本機模型同樣可行。
 - **它可以替我應徵工作嗎？**它會準備好一切——調整過的 CV、求職信、追蹤器列、follow-up——但任何對外的動作（寄送）都由你來核准。它是 coworker，不是自動駕駛。
 - **這和 OpenWorker 有關聯嗎？**沒有。它針對的是 OpenWorker 的 coworker 格式與開源的 `career-ops` 專案；兩者皆採 MIT 授權。

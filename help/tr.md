@@ -114,6 +114,6 @@ Coworker `scheduling: true` bildirir, böylece OpenWorker'da yinelenen çalışt
 ## 12. FAQ
 
 - **Verilerimin bulutta olması gerekiyor mu?** Hayır. Her şey yereldir; herhangi bir şeyi yalnızca seçtiğiniz model ve konnektörler görür, ve yalnızca onayladığınız kadarını.
-- **Hangi modeller en iyi çalışır?** Güçlü tool-calling modelleri (frontmatter `anthropic:claude-opus-4-8` ve `openai:gpt-5.5` önerir); Ollama üzerinden yetenekli bir yerel model de işe yarar.
+- **Hangi modeller en iyi çalışır?** Güçlü tool-calling modelleri (frontmatter `anthropic:claude-opus-5` ve `openai:gpt-5.5` önerir); Ollama üzerinden yetenekli bir yerel model de işe yarar.
 - **Benim için işlere başvurabilir mi?** Her şeyi hazırlar — uyarlanmış CV, ön yazı, tracker satırı, follow-up — ancak dışarıya yönelik herhangi bir eylem (bir gönderim) sizin onayınıza bağlıdır. O bir coworker'dır, bir otopilot değil.
 - **Bu, OpenWorker ile bağlantılı mı?** Hayır. OpenWorker coworker formatını ve open-source `career-ops` projesini hedefler; her ikisi de MIT lisanslıdır.

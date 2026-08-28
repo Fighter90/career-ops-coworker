@@ -114,6 +114,6 @@ Coworker deklaruje `scheduling: true`, więc w OpenWorker możesz ustawić cykli
 ## 12. FAQ
 
 - **Czy potrzebuje moich danych w chmurze?** Nie. Wszystko jest lokalne; cokolwiek widzą wyłącznie wybrany przez Ciebie model i konektory — i tylko to, co zatwierdzisz.
-- **Które modele działają najlepiej?** Silne modele z obsługą tool-callingu (frontmatter rekomenduje `anthropic:claude-opus-4-8` i `openai:gpt-5.5`); sprawdzi się też wydajny lokalny model przez Ollama.
+- **Które modele działają najlepiej?** Silne modele z obsługą tool-callingu (frontmatter rekomenduje `anthropic:claude-opus-5` i `openai:gpt-5.5`); sprawdzi się też wydajny lokalny model przez Ollama.
 - **Czy może aplikować na oferty za mnie?** Przygotowuje wszystko — dopasowane CV, list motywacyjny, wiersz w trackerze, follow-up — ale każde działanie na zewnątrz (wysyłkę) zatwierdzasz Ty. To coworker, a nie autopilot.
 - **Czy jest to powiązane z OpenWorker?** Nie. Projekt jest ukierunkowany na format coworkera OpenWorker i open-source'owy projekt `career-ops`; oba są na licencji MIT.

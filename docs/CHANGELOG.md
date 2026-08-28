@@ -2,6 +2,18 @@
 
 All notable changes to **career-ops-coworker** are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project adheres to [Semantic Versioning](https://semver.org/). The coworker's own `version:` (in `career-ops.md` frontmatter) tracks the major line — OpenWorker shows it as the "replaces vN" note on re-import.
 
+## [1.3.1] — 2026-08-28
+
+Maintenance — the recommended Anthropic model is current again.
+
+### Changed
+- **`recommended_models` now names `anthropic:claude-opus-5`** (was `anthropic:claude-opus-4-8`, a generation behind — the Claude 5 family is current). Updated in the persona frontmatter and in the "which models work best?" FAQ of the help guide ×17. `openai:gpt-5.5` is unchanged. This is a recommendation only: OpenWorker still runs whatever model the user has configured, including a local Ollama one, so no behavior changes for an existing install.
+
+### Verified
+- `scripts/validate-persona.py` — INSTALLABLE ✓ (OpenWorker manifest rules).
+- Help-bundle parity ×17 — 12 H2 headings, structure unchanged.
+- Every technical claim in the persona re-checked line by line against the live projects: all six `npm run` scripts (`scan`, `tracker`, `find`, `patterns`, `verify:portals`, `cv:verify-facts`) and their `.mjs` targets exist in `Fighter90/career-ops`; every `scan.mjs` flag the persona documents (`--dry-run`, `--company`, `--since`, `--posted-after`, `--verify`, `--quiet`) is real; `web-ui/bin/start.sh` and port `4317` are current. No other drift found.
+
 ## [1.3.0] — 2026-08-26
 
 One-command install + install straight from the OpenWorker interface.

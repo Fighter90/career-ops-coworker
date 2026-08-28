@@ -114,6 +114,6 @@ coworker는 `scheduling: true`를 선언하므로 OpenWorker에서 반복 실행
 ## 12. FAQ
 
 - **내 데이터가 클라우드에 있어야 하나요?** 아니요. 모든 것이 로컬입니다. 당신이 선택한 모델과 커넥터만 무언가를 보며, 그것도 당신이 승인한 것만 봅니다.
-- **어떤 모델이 가장 좋나요?** 툴 호출에 강한 모델(frontmatter는 `anthropic:claude-opus-4-8`과 `openai:gpt-5.5`를 권장합니다). Ollama를 통한 성능 좋은 로컬 모델도 됩니다.
+- **어떤 모델이 가장 좋나요?** 툴 호출에 강한 모델(frontmatter는 `anthropic:claude-opus-5`과 `openai:gpt-5.5`를 권장합니다). Ollama를 통한 성능 좋은 로컬 모델도 됩니다.
 - **나 대신 채용에 지원할 수 있나요?** 모든 것을 준비합니다 — 맞춤 작성된 CV, 커버 레터, 트래커 행, follow-up — 그러나 모든 외부 행동(발송)은 당신이 승인해야 합니다. 이것은 자동 조종 장치가 아니라 coworker입니다.
 - **이것이 OpenWorker와 제휴 관계인가요?** 아니요. OpenWorker의 coworker 형식과 오픈소스 `career-ops` 프로젝트를 대상으로 합니다. 둘 다 MIT 라이선스입니다.

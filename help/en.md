@@ -113,6 +113,6 @@ The coworker declares `scheduling: true`, so you can set recurring runs in OpenW
 ## 12. FAQ
 
 - **Does it need my data in the cloud?** No. Everything is local; only your chosen model and connectors ever see anything, and only what you approve.
-- **Which models work best?** Strong tool-calling models (the frontmatter recommends `anthropic:claude-opus-4-8` and `openai:gpt-5.5`); a capable local model via Ollama also works.
+- **Which models work best?** Strong tool-calling models (the frontmatter recommends `anthropic:claude-opus-5` and `openai:gpt-5.5`); a capable local model via Ollama also works.
 - **Can it apply to jobs for me?** It prepares everything — the tailored CV, the cover letter, the tracker row, the follow-up — but any outward action (a send) is yours to approve. It is a coworker, not an autopilot.
 - **Is this affiliated with OpenWorker?** No. It targets the OpenWorker coworker format and the open-source `career-ops` project; both are MIT-licensed.

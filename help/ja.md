@@ -114,6 +114,6 @@ coworker は `scheduling: true` を宣言するため、OpenWorker で定期的�
 ## 12. FAQ
 
 - **私のデータをクラウドに置く必要はありますか？** いいえ。すべてはローカルです。何かを目にするのはあなたが選んだモデルとコネクターだけで、しかもあなたが承認したものだけです。
-- **どのモデルが最も適していますか？** tool-calling に強いモデル（frontmatter は `anthropic:claude-opus-4-8` と `openai:gpt-5.5` を推奨します）。Ollama 経由の高性能なローカルモデルも使えます。
+- **どのモデルが最も適していますか？** tool-calling に強いモデル（frontmatter は `anthropic:claude-opus-5` と `openai:gpt-5.5` を推奨します）。Ollama 経由の高性能なローカルモデルも使えます。
 - **私の代わりに求人へ応募できますか？** すべてを準備します — 仕立てた CV、カバーレター、トラッカーの行、フォローアップ — が、外向きの動作（送信）はあなたが承認するものです。これは coworker であり、オートパイロットではありません。
 - **これは OpenWorker と提携していますか？** いいえ。OpenWorker の coworker 形式とオープンソースの `career-ops` プロジェクトを対象にしています。どちらも MIT ライセンスです。

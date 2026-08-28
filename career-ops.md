@@ -8,7 +8,7 @@ requires_folder: true
 scheduling: true
 messaging: false
 connectors: [gmail, google_calendar, github]
-recommended_models: [anthropic:claude-opus-4-8, openai:gpt-5.5]
+recommended_models: [anthropic:claude-opus-5, openai:gpt-5.5]
 default_permission_mode: interactive
 version: "1"
 group: general
