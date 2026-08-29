@@ -66,9 +66,9 @@ Coworker her göreve kısa bir planla başlar (ilerleme paneli), her seferinde t
 
 - **Scan** — proje tarayıcısını çalıştırır (`npm run scan` → `node scan.mjs`; `--dry-run`, `--company "<Name>"`, `--since 7` gibi bayraklar). Sıfır API tokenı — genel panolara karşı saf HTTP. Kaç ilan olduğunu ve hangi kaynaklardan geldiğini bildirir.
 - **Score fit** — her ilanı CV + profile + two-pager'ınıza göre **0–5** arasında puanlar; tek satırlık bir gerekçe ve somut eksikliklerle birlikte. Sıralar ve en iyi birkaçını öne çıkarır.
-- **Tailor** — istek üzerine, role özgü bir CV ve bir ön yazıyı dosya olarak yazar (`reports/` veya `applications/` altında). **Yalnızca** CV'nizde zaten var olan gerçeklere dayanır; asla bir işveren, tarih, metrik veya beceri uydurmaz ve bir eksikliği örtbas etmek yerine işaretler. (`npm run cv:verify-facts` projenin doğruluk kapısıdır.)
+- **Tailor** — istek üzerine, role özgü bir CV ve bir ön yazıyı dosya olarak yazar (`reports/` veya `applications/` altında). **Yalnızca** CV'nizde zaten var olan gerçeklere dayanır; asla bir işveren, tarih, metrik veya beceri uydurmaz ve bir eksikliği örtbas etmek yerine işaretler. (`npm run cv:verify-facts` projenin doğruluk kapısıdır; `npm run cv:verify-ats` ise eşlik eden okunabilirlik kapısıdır — facts bir iddianın DOĞRU olup olmadığını, ATS bir özgeçmiş ayrıştırıcısının onu OKUYABİLİP okuyamadığını denetler.)
 - **Track** — `data/applications.md` içindeki satırı, projenin zaten kullandığı kanonik durumla ekler/günceller.
-- **Follow up** — kadansı kontrol eder ve e-postanın **taslağını** hazırlar; gönderim onaya tabidir.
+- **Follow up** — kadansı kontrol eder ve e-postanın **taslağını** hazırlar; gönderim onaya tabidir. Zamanı gelme bilgisi, her başvuruyu urgent / overdue / waiting / cold olarak sınıflayan projeye ait `node followup-cadence.mjs` dosyasından gelir; başka bir soruyu yanıtlayan izleyici durumundan değil.
 - **Interviews** — istek üzerine, takviminize mülakat zaman aralıkları yerleştirir ve hazırlık hatırlatıcıları ekler (onaya tabidir).
 
 ## 6. Launch the career-ops-ui dashboard from OpenWorker

@@ -66,9 +66,9 @@ Coworkeren starter hver opgave med en kort plan (Progress-panelet), arbejder ét
 
 - **Scan** — kører projektets scanner (`npm run scan` → `node scan.mjs`; flag som `--dry-run`, `--company "<Name>"`, `--since 7`). Nul API-tokens — ren HTTP mod offentlige jobtavler. Rapporterer hvor mange opslag og fra hvilke kilder.
 - **Score fit** — vurderer hvert opslag **0–5** op mod dit CV + profile + two-pager, med en begrundelse på én linje og de konkrete mangler. Rangerer og fremhæver de bedste af dem.
-- **Tailor** — skriver på forespørgsel et rollespecifikt CV og et følgebrev som filer (under `reports/` eller `applications/`). Funderet **kun** i fakta, der allerede findes i dit CV; den opfinder aldrig en arbejdsgiver, dato, måltal eller færdighed og markerer en mangel i stedet for at dække over den. (`npm run cv:verify-facts` er projektets sandhedsgate.)
+- **Tailor** — skriver på forespørgsel et rollespecifikt CV og et følgebrev som filer (under `reports/` eller `applications/`). Funderet **kun** i fakta, der allerede findes i dit CV; den opfinder aldrig en arbejdsgiver, dato, måltal eller færdighed og markerer en mangel i stedet for at dække over den. (`npm run cv:verify-facts` er projektets sandhedsgate; `npm run cv:verify-ats` er den tilhørende læsbarhedsgate — facts tjekker, om en påstand er SAND, ATS om en cv-parser kan LÆSE den.)
 - **Track** — tilføjer/opdaterer rækken i `data/applications.md` med den kanoniske status, som projektet allerede bruger.
-- **Follow up** — tjekker kadencen og **skriver udkast** til e-mailen; afsendelse kræver godkendelse.
+- **Follow up** — tjekker kadencen og **skriver udkast** til e-mailen; afsendelse kræver godkendelse. Forfald kommer fra projektets eget `node followup-cadence.mjs`, som klassificerer hver ansøgning som urgent / overdue / waiting / cold — ikke fra tracker-statussen, der besvarer et andet spørgsmål.
 - **Interviews** — placerer på forespørgsel interviewtider i din kalender og tilføjer forberedelsespåmindelser (kræver godkendelse).
 
 ## 6. Launch the career-ops-ui dashboard from OpenWorker

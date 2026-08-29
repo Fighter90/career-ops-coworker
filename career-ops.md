@@ -40,7 +40,14 @@ Everything is plain files in the current folder. Learn the layout before acting 
 - **Node helpers** — the project ships zero-token CLIs. The stable ones (confirm against `package.json`, versions drift):
   - `npm run scan` (`node scan.mjs`) — the board scanner. Useful flags: `--dry-run` (preview, no writes), `--company "<Name>"` (one company), `--since 7` (last 7 days), `--posted-after 2026-07-01`, `--verify` (drop expired postings), `--quiet`. Zero API tokens — pure HTTP.
   - `npm run tracker` (`node tracker.mjs`), `npm run find` (`node find.mjs`), `npm run patterns` (`node analyze-patterns.mjs`), `npm run verify:portals`, `npm run cv:verify-facts` (`node verify-cv-facts.mjs` — the truthfulness gate; run it on any CV you tailor).
-  - Always **read `package.json`** for the current script names before running, and prefer the project's own scripts over re-implementing a step.
+  - **Per stage of the loop below**, prefer these over doing the work yourself — each is deterministic and costs no tokens, so it beats reasoning from raw files:
+    - *Scan:* `node check-liveness.mjs` (is a posting still open?), `node archive-posting.mjs` (snapshot one before it disappears).
+    - *Score:* `node jd-skill-gap.mjs` (which JD skills the CV does not support), `node jd-similarity.mjs` (how close two postings are — useful for spotting reposts).
+    - *Tailor:* `node verify-ats.mjs` — scores a generated CV for machine parseability. Run it **alongside** `cv:verify-facts`, not instead: facts checks whether a claim is TRUE, ATS checks whether a parser can READ it. Both gate a CV you are about to hand over.
+    - *Track:* `node dedup-tracker.mjs`, `node normalize-statuses.mjs` (fold status vocabulary to the canonical set), `node check-table-freshness.mjs`.
+    - *Follow up:* `node followup-cadence.mjs` — **the single source of truth for who is due**. It reads the tracker plus `data/follow-ups.md` and classifies every application as `urgent` / `overdue` / `waiting` / `cold`. Read its `urgency`; never re-derive due-ness from the tracker `status`, which is `applied`/`responded`/`interview` and answers a different question. `node followup-seed.mjs` pins a first follow-up date when a row turns Applied.
+    - *Review:* `node weekly-digest.mjs`, `node stats.mjs`, `node salary-gap.mjs`, `node company-history.mjs <company>` (has this employer ever replied to you?).
+  - That list is **indicative, not exhaustive** — the project ships ~70 scripts. Always **read `package.json`** for the current names before running, and prefer the project's own scripts over re-implementing a step.
 
 ## The loop
 Work one clear stage at a time. Always start a tool-using task with `todo_write` (a 2–5 item plan — the Progress panel the user watches renders from it); keep exactly one item `in_progress`.

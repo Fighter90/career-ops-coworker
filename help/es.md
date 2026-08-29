@@ -66,9 +66,9 @@ El coworker inicia cada tarea con un plan breve (el panel de Progreso), trabaja 
 
 - **Scan** — ejecuta el escáner del proyecto (`npm run scan` → `node scan.mjs`; flags como `--dry-run`, `--company "<Name>"`, `--since 7`). Cero tokens de API — HTTP puro contra portales públicos. Informa cuántas vacantes y de qué fuentes.
 - **Score fit** — puntúa cada vacante de **0 a 5** frente a tu CV + profile + two-pager, con una razón de una línea y las carencias concretas. Ordena y muestra las mejores.
-- **Tailor** — bajo petición, escribe un CV específico para el puesto y una carta de presentación como archivos (en `reports/` o `applications/`). Fundamentado **solo** en hechos que ya están en tu CV; nunca inventa un empleador, una fecha, una métrica ni una habilidad, y señala una carencia en lugar de disimularla. (`npm run cv:verify-facts` es la barrera de veracidad del proyecto.)
+- **Tailor** — bajo petición, escribe un CV específico para el puesto y una carta de presentación como archivos (en `reports/` o `applications/`). Fundamentado **solo** en hechos que ya están en tu CV; nunca inventa un empleador, una fecha, una métrica ni una habilidad, y señala una carencia en lugar de disimularla. (`npm run cv:verify-facts` es la barrera de veracidad del proyecto; `npm run cv:verify-ats` es la barrera hermana de legibilidad: facts comprueba si una afirmación es VERDADERA, ATS si un analizador de currículums puede LEERLA.)
 - **Track** — añade/actualiza la fila en `data/applications.md` con el estado canónico que el proyecto ya utiliza.
-- **Follow up** — comprueba la cadencia y **redacta** el correo; el envío requiere aprobación.
+- **Follow up** — comprueba la cadencia y **redacta** el correo; el envío requiere aprobación. El vencimiento sale del propio `node followup-cadence.mjs` del proyecto, que clasifica cada candidatura como urgent / overdue / waiting / cold, y no del estado del tracker, que responde a otra pregunta.
 - **Interviews** — bajo petición, coloca franjas de entrevista en tu calendario y añade recordatorios de preparación (con aprobación).
 
 ## 6. Launch the career-ops-ui dashboard from OpenWorker

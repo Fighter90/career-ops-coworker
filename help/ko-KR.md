@@ -66,9 +66,9 @@ coworker는 모든 작업을 짧은 계획(진행 상황 패널)으로 시작해
 
 - **Scan** — 프로젝트 스캐너를 실행합니다(`npm run scan` → `node scan.mjs`; `--dry-run`, `--company "<Name>"`, `--since 7` 같은 플래그). API 토큰 0개 — 공개 보드를 상대로 한 순수 HTTP입니다. 몇 개의 공고를 어떤 소스에서 찾았는지 보고합니다.
 - **Score fit** — 각 공고를 당신의 CV + profile + two-pager와 비교해 **0–5**점으로 평가하며, 한 줄 이유와 구체적인 격차를 함께 제시합니다. 순위를 매겨 상위 몇 개를 보여줍니다.
-- **Tailor** — 요청 시 역할별 CV와 커버 레터를 파일로 작성합니다(`reports/` 또는 `applications/` 아래). **오직** 당신의 CV에 이미 있는 사실에만 근거합니다. 고용주, 날짜, 지표, 스킬을 절대 지어내지 않으며, 격차를 덮어 감추는 대신 표시합니다. (`npm run cv:verify-facts`가 프로젝트의 진실성 게이트입니다.)
+- **Tailor** — 요청 시 역할별 CV와 커버 레터를 파일로 작성합니다(`reports/` 또는 `applications/` 아래). **오직** 당신의 CV에 이미 있는 사실에만 근거합니다. 고용주, 날짜, 지표, 스킬을 절대 지어내지 않으며, 격차를 덮어 감추는 대신 표시합니다. (`npm run cv:verify-facts`가 프로젝트의 진실성 게이트이고, `npm run cv:verify-ats`가 짝을 이루는 판독성 게이트입니다 — facts는 주장이 사실인지를, ATS는 이력서 파서가 읽을 수 있는지를 확인합니다.)
 - **Track** — 프로젝트가 이미 사용하는 표준 상태로 `data/applications.md`의 행을 추가하거나 업데이트합니다.
-- **Follow up** — 주기를 확인하고 이메일 **초안을 작성**합니다. 발송은 승인이 필요합니다.
+- **Follow up** — 주기를 확인하고 이메일 **초안을 작성**합니다. 발송은 승인이 필요합니다. 기한 도래 여부는 각 지원을 urgent / overdue / waiting / cold로 분류하는 프로젝트 자체의 `node followup-cadence.mjs`에서 가져오며, 다른 질문에 답하는 트래커 상태에서 가져오지 않습니다.
 - **Interviews** — 요청 시 당신의 캘린더에 면접 일정을 넣고 준비 알림을 추가합니다(승인 필요).
 
 ## 6. Launch the career-ops-ui dashboard from OpenWorker

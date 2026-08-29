@@ -66,9 +66,9 @@ Der Coworker beginnt jede Aufgabe mit einem kurzen Plan (dem Fortschrittspanel),
 
 - **Scan** — führt den Projekt-Scanner aus (`npm run scan` → `node scan.mjs`; Flags wie `--dry-run`, `--company "<Name>"`, `--since 7`). Null API-Tokens — reines HTTP gegen öffentliche Jobbörsen. Meldet, wie viele Stellenanzeigen und aus welchen Quellen.
 - **Score fit** — bewertet jede Stellenanzeige **0–5** anhand Ihres CV + profile + two-pager, mit einer einzeiligen Begründung und den konkreten Lücken. Ordnet sie und hebt die besten wenigen hervor.
-- **Tailor** — schreibt auf Anfrage ein rollenspezifisches CV und ein Anschreiben als Dateien (unter `reports/` oder `applications/`). Ausschließlich in Fakten begründet, die bereits in Ihrem CV stehen; er erfindet niemals einen Arbeitgeber, ein Datum, eine Kennzahl oder eine Fähigkeit und markiert eine Lücke, statt sie zu übertünchen. (`npm run cv:verify-facts` ist das Wahrhaftigkeits-Gate des Projekts.)
+- **Tailor** — schreibt auf Anfrage ein rollenspezifisches CV und ein Anschreiben als Dateien (unter `reports/` oder `applications/`). Ausschließlich in Fakten begründet, die bereits in Ihrem CV stehen; er erfindet niemals einen Arbeitgeber, ein Datum, eine Kennzahl oder eine Fähigkeit und markiert eine Lücke, statt sie zu übertünchen. (`npm run cv:verify-facts` ist das Wahrhaftigkeits-Gate des Projekts; `npm run cv:verify-ats` ist das zugehörige Lesbarkeits-Gate — facts prüft, ob eine Aussage WAHR ist, ATS, ob ein Lebenslauf-Parser sie LESEN kann.)
 - **Track** — hängt die Zeile in `data/applications.md` an bzw. aktualisiert sie mit dem kanonischen Status, den das Projekt bereits verwendet.
-- **Follow up** — prüft die Kadenz und **entwirft** die E-Mail; das Senden erfordert eine Freigabe.
+- **Follow up** — prüft die Kadenz und **entwirft** die E-Mail; das Senden erfordert eine Freigabe. Die Fälligkeit stammt aus dem projekteigenen `node followup-cadence.mjs`, das jede Bewerbung als urgent / overdue / waiting / cold einstuft — nicht aus dem Tracker-Status, der eine andere Frage beantwortet.
 - **Interviews** — platziert auf Anfrage Interview-Termine in Ihrem Kalender und fügt Erinnerungen zur Vorbereitung hinzu (freigabepflichtig).
 
 ## 6. Launch the career-ops-ui dashboard from OpenWorker

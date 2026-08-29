@@ -65,9 +65,9 @@ The coworker starts every task with a short plan (the Progress panel), works one
 
 - **Scan** — runs the project scanner (`npm run scan` → `node scan.mjs`; flags like `--dry-run`, `--company "<Name>"`, `--since 7`). Zero API tokens — pure HTTP against public boards. Reports how many postings, from which sources.
 - **Score fit** — rates each posting **0–5** against your CV + profile + two-pager, with a one-line reason and the concrete gaps. Ranks and surfaces the top handful.
-- **Tailor** — on request, writes a role-specific CV and a cover letter as files (under `reports/` or `applications/`). Grounded **only** in facts already in your CV; it never invents an employer, date, metric, or skill, and flags a gap instead of papering over it. (`npm run cv:verify-facts` is the project's truthfulness gate.)
+- **Tailor** — on request, writes a role-specific CV and a cover letter as files (under `reports/` or `applications/`). Grounded **only** in facts already in your CV; it never invents an employer, date, metric, or skill, and flags a gap instead of papering over it. (`npm run cv:verify-facts` is the project's truthfulness gate; `npm run cv:verify-ats` is the companion parseability gate — facts checks whether a claim is TRUE, ATS whether a résumé parser can READ it.)
 - **Track** — appends/updates the row in `data/applications.md` with the canonical status the project already uses.
-- **Follow up** — checks cadence and **drafts** the email; sending is approval-gated.
+- **Follow up** — checks cadence and **drafts** the email; sending is approval-gated. Due-ness comes from the project's own `node followup-cadence.mjs`, which classifies every application as urgent / overdue / waiting / cold — not from the tracker status, which answers a different question.
 - **Interviews** — on request, places interview slots on your calendar and adds prep reminders (approval-gated).
 
 ## 6. Launch the career-ops-ui dashboard from OpenWorker

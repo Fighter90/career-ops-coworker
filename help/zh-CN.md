@@ -66,9 +66,9 @@ coworker 在每个任务开始时都会先给出一个简短的计划（进度�
 
 - **Scan**——运行项目的扫描器（`npm run scan` → `node scan.mjs`；诸如 `--dry-run`、`--company "<Name>"`、`--since 7` 之类的标志）。零 API 令牌——纯 HTTP 请求访问公开招聘网站。报告找到了多少职位、来自哪些来源。
 - **Score fit**——针对你的 CV + profile + two-pager 为每条职位打 **0–5** 分，附上一行理由和具体的差距。排序并呈现最靠前的少数几个。
-- **Tailor**——按需将针对特定角色的 CV 和求职信写成文件（放在 `reports/` 或 `applications/` 下）。**仅** 以你 CV 中已有的事实为依据；它绝不编造雇主、日期、指标或技能，并且会标注差距而非加以掩盖。（`npm run cv:verify-facts` 是本项目的真实性关卡。）
+- **Tailor**——按需将针对特定角色的 CV 和求职信写成文件（放在 `reports/` 或 `applications/` 下）。**仅** 以你 CV 中已有的事实为依据；它绝不编造雇主、日期、指标或技能，并且会标注差距而非加以掩盖。（`npm run cv:verify-facts` 是本项目的真实性关卡，`npm run cv:verify-ats` 是与之配套的可解析性关卡 —— 前者检查陈述是否属实，后者检查简历解析器能否读懂。）
 - **Track**——在 `data/applications.md` 中追加/更新对应行，使用项目已在使用的规范状态。
-- **Follow up**——检查节奏并 **起草** 邮件；发送需经过审批。
+- **Follow up**——检查节奏并 **起草** 邮件；发送需经过审批。是否到期取自项目自带的 `node followup-cadence.mjs`，它把每份申请归类为 urgent / overdue / waiting / cold，而不是取自回答另一个问题的追踪表状态。
 - **Interviews**——按需在你的日历上安排面试时段，并添加准备提醒（需经过审批）。
 
 ## 6. Launch the career-ops-ui dashboard from OpenWorker

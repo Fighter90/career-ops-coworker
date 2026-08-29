@@ -2,6 +2,25 @@
 
 All notable changes to **career-ops-coworker** are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project adheres to [Semantic Versioning](https://semver.org/). The coworker's own `version:` (in `career-ops.md` frontmatter) tracks the major line — OpenWorker shows it as the "replaces vN" note on re-import.
 
+## [1.4.0] — 2026-08-29
+
+The coworker now knows the project's deterministic helpers for the stages it already performs.
+
+### Added
+- **A loop-stage helper map in the persona.** The project ships ~70 npm scripts; the persona documented **6**, and none of them covered stages it explicitly claims to run. Each stage of the loop now names the zero-token CLI that does that job deterministically — so the coworker reaches for the project's own engine instead of reasoning it out from raw files:
+  - *Scan* — `check-liveness.mjs` (is the posting still open?), `archive-posting.mjs`.
+  - *Score* — `jd-skill-gap.mjs`, `jd-similarity.mjs`.
+  - *Tailor* — **`verify-ats.mjs`**, run alongside `cv:verify-facts`, not instead of it: facts checks whether a claim is TRUE, ATS whether a résumé parser can READ it. Two different gates on the same document.
+  - *Track* — `dedup-tracker.mjs`, `normalize-statuses.mjs`, `check-table-freshness.mjs`.
+  - *Follow up* — **`followup-cadence.mjs`**, the single source of truth for who is due. The persona is now explicit that due-ness comes from its `urgency` field (`urgent` / `overdue` / `waiting` / `cold`) and **never** from the tracker `status` (`applied` / `responded` / `interview`), which answers a different question — a confusion that had already caused a real bug downstream in `career-ops-ui`.
+  - *Review* — `weekly-digest.mjs`, `stats.mjs`, `salary-gap.mjs`, `company-history.mjs`.
+  The list is marked indicative, not exhaustive; the standing instruction to read `package.json` for current names is unchanged.
+- **Help ×17: the ATS gate and the cadence engine.** §5 "The workflow, stage by stage" now names `cv:verify-ats` next to `cv:verify-facts` in *Tailor*, and `followup-cadence.mjs` in *Follow up* with the same status-vs-urgency warning. Heading structure untouched — the 17-locale parity gate stays green.
+
+### Verified
+- Full re-audit of every concrete claim in the repo against the live projects: all 6 documented `npm run` scripts and their `.mjs` targets exist in [`Fighter90/career-ops`](https://github.com/Fighter90/career-ops); every `scan.mjs` flag the persona lists (`--dry-run`, `--company`, `--since`, `--posted-after`, `--verify`, `--quiet`) is real; `web-ui/bin/start.sh` and port `4317` are current; `cv.md`, `portals.yml`, `config/{profile.yml,two-pager.yml,memory.md}`, `data/applications.md` all present; the 12 newly-referenced helpers all exist. All six external URLs (openworker.com, the four GitHub repos, the upstream) return 200, as does the `install.sh` raw URL. **No stale claims found** — this release adds capability, it does not correct drift.
+- `scripts/validate-persona.py` — INSTALLABLE ✓. Help parity ×17 — 12 H2, unchanged. Install bundle rebuilt.
+
 ## [1.3.1] — 2026-08-28
 
 Maintenance — the recommended Anthropic model is current again.

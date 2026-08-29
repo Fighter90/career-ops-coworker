@@ -66,9 +66,9 @@ Le coworker commence chaque tâche par un bref plan (le panneau de progression),
 
 - **Scan** — lance le scanner du projet (`npm run scan` → `node scan.mjs` ; options comme `--dry-run`, `--company "<Name>"`, `--since 7`). Zéro token d'API — du HTTP pur vers les sites d'offres publics. Indique combien d'annonces, et de quelles sources.
 - **Score fit** — attribue à chaque annonce une note de **0–5** par rapport à votre CV + profile + two-pager, avec une justification en une ligne et les lacunes concrètes. Classe et fait remonter les quelques meilleures.
-- **Tailor** — sur demande, écrit un CV spécifique au poste et une lettre de motivation sous forme de fichiers (dans `reports/` ou `applications/`). Fondé **uniquement** sur des faits déjà présents dans votre CV ; il n'invente jamais un employeur, une date, une métrique ou une compétence, et signale une lacune au lieu de la masquer. (`npm run cv:verify-facts` est le garde-fou de véracité du projet.)
+- **Tailor** — sur demande, écrit un CV spécifique au poste et une lettre de motivation sous forme de fichiers (dans `reports/` ou `applications/`). Fondé **uniquement** sur des faits déjà présents dans votre CV ; il n'invente jamais un employeur, une date, une métrique ou une compétence, et signale une lacune au lieu de la masquer. (`npm run cv:verify-facts` est le garde-fou de véracité du projet ; `npm run cv:verify-ats` en est le pendant pour la lisibilité machine : facts vérifie si une affirmation est VRAIE, ATS si un analyseur de CV peut la LIRE.)
 - **Track** — ajoute/met à jour la ligne dans `data/applications.md` avec le statut canonique que le projet utilise déjà.
-- **Follow up** — vérifie la cadence et **rédige** l'e-mail ; l'envoi est soumis à approbation.
+- **Follow up** — vérifie la cadence et **rédige** l'e-mail ; l'envoi est soumis à approbation. L'échéance vient du `node followup-cadence.mjs` du projet, qui classe chaque candidature en urgent / overdue / waiting / cold, et non du statut du suivi, qui répond à une autre question.
 - **Interviews** — sur demande, place des créneaux d'entretien dans votre calendrier et ajoute des rappels de préparation (soumis à approbation).
 
 ## 6. Launch the career-ops-ui dashboard from OpenWorker

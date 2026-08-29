@@ -66,9 +66,9 @@ Coworker zaczyna każde zadanie od krótkiego planu (panel postępu), pracuje et
 
 - **Scan** — uruchamia skaner projektu (`npm run scan` → `node scan.mjs`; flagi takie jak `--dry-run`, `--company "<Name>"`, `--since 7`). Zero tokenów API — czysty HTTP wobec publicznych tablic ofert. Raportuje, ile ogłoszeń i z jakich źródeł.
 - **Score fit** — ocenia każde ogłoszenie w skali **0–5** względem Twojego CV + profile + two-pager, z jednozdaniowym uzasadnieniem i konkretnymi brakami. Rankinguje i pokazuje kilka najlepszych.
-- **Tailor** — na żądanie tworzy CV pod konkretną rolę i list motywacyjny jako pliki (w `reports/` lub `applications/`). Ugruntowane **wyłącznie** w faktach już obecnych w Twoim CV; nigdy nie wymyśla pracodawcy, daty, metryki ani umiejętności i sygnalizuje brak, zamiast go zamaskować. (`npm run cv:verify-facts` to projektowa bramka prawdziwości.)
+- **Tailor** — na żądanie tworzy CV pod konkretną rolę i list motywacyjny jako pliki (w `reports/` lub `applications/`). Ugruntowane **wyłącznie** w faktach już obecnych w Twoim CV; nigdy nie wymyśla pracodawcy, daty, metryki ani umiejętności i sygnalizuje brak, zamiast go zamaskować. (`npm run cv:verify-facts` to projektowa bramka prawdziwości; `npm run cv:verify-ats` to bliźniacza bramka czytelności maszynowej — facts sprawdza, czy twierdzenie jest PRAWDZIWE, ATS czy parser CV potrafi je ODCZYTAĆ.)
 - **Track** — dodaje/aktualizuje wiersz w `data/applications.md` z kanonicznym statusem, którego projekt już używa.
-- **Follow up** — sprawdza rytm kontaktu i **przygotowuje szkic** wiadomości; wysyłka wymaga zatwierdzenia.
+- **Follow up** — sprawdza rytm kontaktu i **przygotowuje szkic** wiadomości; wysyłka wymaga zatwierdzenia. Termin bierze się z projektowego `node followup-cadence.mjs`, który klasyfikuje każdą aplikację jako urgent / overdue / waiting / cold, a nie ze statusu w trackerze, który odpowiada na inne pytanie.
 - **Interviews** — na żądanie umieszcza terminy rozmów w Twoim kalendarzu i dodaje przypomnienia o przygotowaniu (za zatwierdzeniem).
 
 ## 6. Launch the career-ops-ui dashboard from OpenWorker
