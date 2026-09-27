@@ -67,7 +67,7 @@ Coworkeren starter hver opgave med en kort plan (Progress-panelet), arbejder ét
 - **Scan** — kører projektets scanner (`npm run scan` → `node scan.mjs`; flag som `--dry-run`, `--company "<Name>"`, `--since 7`). Nul API-tokens — ren HTTP mod offentlige jobtavler. Rapporterer hvor mange opslag og fra hvilke kilder.
 - **Score fit** — vurderer hvert opslag **0–5** op mod dit CV + profile + two-pager, med en begrundelse på én linje og de konkrete mangler. Rangerer og fremhæver de bedste af dem.
 - **Tailor** — skriver på forespørgsel et rollespecifikt CV og et følgebrev som filer (under `reports/` eller `applications/`). Funderet **kun** i fakta, der allerede findes i dit CV; den opfinder aldrig en arbejdsgiver, dato, måltal eller færdighed og markerer en mangel i stedet for at dække over den. (`npm run cv:verify-facts` er projektets sandhedsgate; `npm run cv:verify-ats` er den tilhørende læsbarhedsgate — facts tjekker, om en påstand er SAND, ATS om en cv-parser kan LÆSE den.)
-- **Track** — tilføjer/opdaterer rækken i `data/applications.md` med den kanoniske status, som projektet allerede bruger.
+- **Track** — tilføjer/opdaterer rækken i `data/applications.md` med den kanoniske status, som projektet allerede bruger. Statusændringer går gennem projektets kanoniske skrivevej, `node set-status.mjs <report#|company> <State>` (tilføj `--on YYYY-MM-DD` for den faktiske hændelsesdag) — den validerer status, holder tracker-låsen og logger overgangen, så coworkeren aldrig redigerer statuscellen i hånden.
 - **Follow up** — tjekker kadencen og **skriver udkast** til e-mailen; afsendelse kræver godkendelse. Forfald kommer fra projektets eget `node followup-cadence.mjs`, som klassificerer hver ansøgning som urgent / overdue / waiting / cold — ikke fra tracker-statussen, der besvarer et andet spørgsmål.
 - **Interviews** — placerer på forespørgsel interviewtider i din kalender og tilføjer forberedelsespåmindelser (kræver godkendelse).
 
@@ -102,6 +102,7 @@ Coworkeren erklærer `scheduling: true`, så du kan opsætte tilbagevendende kø
 ## 10. Troubleshooting
 
 - **»Ingen opslag fundet«.** Bekræft, at `portals.yml` viser aktiverede virksomheder/jobtavler, og at dit netværk kan nå dem (nogle regionale jobtavler er blokeret bag en full-tunnel-VPN — afbryd den, og scan igen). Prøv `npm run scan -- --dry-run` for at få en forhåndsvisning.
+- **En indstilling i `config/profile.yml` ser ud til at blive ignoreret** (forkert outputsprog, standard-spend tier). Som regel en stavefejl i en nøgle — `node validate-profile.mjs` navngiver den, og `npm run doctor` udskriver hele opsætningstjeklisten.
 - **Dashboardet vil ikke åbne.** Sørg for, at Node ≥ 18 er installeret, og at port 4317 er fri (`PORT=8080 bash web-ui/bin/start.sh`). Tjek `http://127.0.0.1:4317/api/health`.
 - **Et tilpasset CV ser tyndt ud.** Det er sandhedsgaten, der virker — den opfinder ikke erfaring. Tilføj de reelle beviser til `cv.md` (eller din GitHub), og tilpas igen.
 - **Coworkeren vil ikke sende en e-mail.** Sådan er det designet — afsendelser kræver godkendelse. Godkend check-in'et, eller skift tilladelsestilstand i OpenWorker, hvis du vil have færre bekræftelser (forstå kompromiset først).

@@ -66,7 +66,7 @@ The coworker starts every task with a short plan (the Progress panel), works one
 - **Scan** — runs the project scanner (`npm run scan` → `node scan.mjs`; flags like `--dry-run`, `--company "<Name>"`, `--since 7`). Zero API tokens — pure HTTP against public boards. Reports how many postings, from which sources.
 - **Score fit** — rates each posting **0–5** against your CV + profile + two-pager, with a one-line reason and the concrete gaps. Ranks and surfaces the top handful.
 - **Tailor** — on request, writes a role-specific CV and a cover letter as files (under `reports/` or `applications/`). Grounded **only** in facts already in your CV; it never invents an employer, date, metric, or skill, and flags a gap instead of papering over it. (`npm run cv:verify-facts` is the project's truthfulness gate; `npm run cv:verify-ats` is the companion parseability gate — facts checks whether a claim is TRUE, ATS whether a résumé parser can READ it.)
-- **Track** — appends/updates the row in `data/applications.md` with the canonical status the project already uses.
+- **Track** — appends/updates the row in `data/applications.md` with the canonical status the project already uses. Status changes go through the project's canonical write path, `node set-status.mjs <report#|company> <State>` (add `--on YYYY-MM-DD` for the real event day) — it validates the state, holds the tracker lock and logs the transition, so the coworker never hand-edits the status cell.
 - **Follow up** — checks cadence and **drafts** the email; sending is approval-gated. Due-ness comes from the project's own `node followup-cadence.mjs`, which classifies every application as urgent / overdue / waiting / cold — not from the tracker status, which answers a different question.
 - **Interviews** — on request, places interview slots on your calendar and adds prep reminders (approval-gated).
 
@@ -101,6 +101,7 @@ The coworker declares `scheduling: true`, so you can set recurring runs in OpenW
 ## 10. Troubleshooting
 
 - **"No postings found."** Confirm `portals.yml` lists enabled companies/boards, and that your network reaches them (some regional boards are blocked behind a full-tunnel VPN — disconnect it and re-scan). Try `npm run scan -- --dry-run` to preview.
+- **A `config/profile.yml` setting seems ignored** (wrong output language, default spend tier). Usually a misspelled key — `node validate-profile.mjs` names it, and `npm run doctor` prints the full setup checklist.
 - **The dashboard won't open.** Ensure Node ≥ 18 is installed and port 4317 is free (`PORT=8080 bash web-ui/bin/start.sh`). Check `http://127.0.0.1:4317/api/health`.
 - **A tailored CV looks thin.** That is the truthfulness gate working — it will not invent experience. Add the real evidence to `cv.md` (or your GitHub) and re-tailor.
 - **The coworker won't send an email.** By design — sends are approval-gated. Approve the check-in, or switch permission mode in OpenWorker if you want fewer prompts (understand the trade-off first).

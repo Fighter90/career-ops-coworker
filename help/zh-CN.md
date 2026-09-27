@@ -67,7 +67,7 @@ coworker 在每个任务开始时都会先给出一个简短的计划（进度�
 - **Scan**——运行项目的扫描器（`npm run scan` → `node scan.mjs`；诸如 `--dry-run`、`--company "<Name>"`、`--since 7` 之类的标志）。零 API 令牌——纯 HTTP 请求访问公开招聘网站。报告找到了多少职位、来自哪些来源。
 - **Score fit**——针对你的 CV + profile + two-pager 为每条职位打 **0–5** 分，附上一行理由和具体的差距。排序并呈现最靠前的少数几个。
 - **Tailor**——按需将针对特定角色的 CV 和求职信写成文件（放在 `reports/` 或 `applications/` 下）。**仅** 以你 CV 中已有的事实为依据；它绝不编造雇主、日期、指标或技能，并且会标注差距而非加以掩盖。（`npm run cv:verify-facts` 是本项目的真实性关卡，`npm run cv:verify-ats` 是与之配套的可解析性关卡 —— 前者检查陈述是否属实，后者检查简历解析器能否读懂。）
-- **Track**——在 `data/applications.md` 中追加/更新对应行，使用项目已在使用的规范状态。
+- **Track**——在 `data/applications.md` 中追加/更新对应行，使用项目已在使用的规范状态。状态变更走项目的规范写入路径 `node set-status.mjs <report#|company> <State>`（真实发生日期加 `--on YYYY-MM-DD`）——它会校验状态、持有 tracker 锁并记录状态转换，因此 coworker 从不手动编辑状态单元格。
 - **Follow up**——检查节奏并 **起草** 邮件；发送需经过审批。是否到期取自项目自带的 `node followup-cadence.mjs`，它把每份申请归类为 urgent / overdue / waiting / cold，而不是取自回答另一个问题的追踪表状态。
 - **Interviews**——按需在你的日历上安排面试时段，并添加准备提醒（需经过审批）。
 
@@ -102,6 +102,7 @@ coworker 声明了 `scheduling: true`，因此你可以在 OpenWorker 中设置�
 ## 10. Troubleshooting
 
 - **「未找到职位」。** 确认 `portals.yml` 中列出了已启用的公司/招聘网站，并且你的网络能够访问它们（某些地区性招聘网站会被全隧道 VPN 屏蔽——断开它再重新扫描）。可尝试 `npm run scan -- --dry-run` 进行预览。
+- **`config/profile.yml` 的某项设置似乎被忽略**（输出语言不对、spend tier 仍是默认值）。通常是键名拼错——`node validate-profile.mjs` 会指出它，`npm run doctor` 会打印完整的安装检查清单。
 - **仪表盘打不开。** 确保已安装 Node ≥ 18 且端口 4317 空闲（`PORT=8080 bash web-ui/bin/start.sh`）。检查 `http://127.0.0.1:4317/api/health`。
 - **定制出的 CV 看起来内容单薄。** 那是真实性关卡在起作用——它不会编造经历。把真实的证据补充进 `cv.md`（或你的 GitHub），然后重新定制。
 - **coworker 不肯发送邮件。** 这是刻意为之——发送需经过审批。批准这次 check-in，或者若你希望减少提示，可在 OpenWorker 中切换权限模式（请先理解其中的权衡）。

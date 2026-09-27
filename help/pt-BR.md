@@ -67,7 +67,7 @@ O coworker começa cada tarefa com um plano curto (o painel de progresso), traba
 - **Scan** — executa o scanner do projeto (`npm run scan` → `node scan.mjs`; flags como `--dry-run`, `--company "<Name>"`, `--since 7`). Zero tokens de API — HTTP puro contra quadros públicos. Informa quantas vagas e de quais fontes.
 - **Score fit** — avalia cada vaga de **0–5** em relação ao seu CV + profile + two-pager, com uma justificativa de uma linha e as lacunas concretas. Classifica e destaca as melhores.
 - **Tailor** — sob solicitação, escreve um CV específico para a vaga e uma carta de apresentação como arquivos (em `reports/` ou `applications/`). Fundamentado **apenas** em fatos que já estão no seu CV; ele nunca inventa um empregador, data, métrica ou habilidade, e sinaliza uma lacuna em vez de encobri-la. (`npm run cv:verify-facts` é o gate de veracidade do projeto; `npm run cv:verify-ats` é o gate irmão de legibilidade: facts verifica se uma afirmação é VERDADEIRA, ATS se um analisador de currículos consegue LÊ-LA.)
-- **Track** — acrescenta/atualiza a linha em `data/applications.md` com o status canônico que o projeto já usa.
+- **Track** — acrescenta/atualiza a linha em `data/applications.md` com o status canônico que o projeto já usa. Mudanças de status passam pelo caminho de escrita canônico do projeto, `node set-status.mjs <report#|company> <State>` (adicione `--on YYYY-MM-DD` para o dia real do evento) — ele valida o status, trava o tracker e registra a transição, então o coworker nunca edita a célula de status à mão.
 - **Follow up** — verifica a cadência e **prepara** o e-mail; o envio passa por aprovação. O vencimento vem do próprio `node followup-cadence.mjs` do projeto, que classifica cada candidatura como urgent / overdue / waiting / cold, e não do status do tracker, que responde a outra pergunta.
 - **Interviews** — sob solicitação, coloca horários de entrevista no seu calendário e adiciona lembretes de preparação (mediante aprovação).
 
@@ -102,6 +102,7 @@ O coworker declara `scheduling: true`, então você pode configurar execuções 
 ## 10. Troubleshooting
 
 - **"Nenhuma vaga encontrada."** Confirme que `portals.yml` lista as empresas/quadros ativados e que sua rede os alcança (alguns quadros regionais ficam bloqueados atrás de uma VPN de túnel completo — desconecte-a e varra novamente). Experimente `npm run scan -- --dry-run` para pré-visualizar.
+- **Uma configuração de `config/profile.yml` parece ignorada** (idioma de saída errado, spend tier padrão). Geralmente é uma chave digitada errado — `node validate-profile.mjs` a aponta, e `npm run doctor` mostra o checklist completo da instalação.
 - **O painel não abre.** Verifique se o Node ≥ 18 está instalado e se a porta 4317 está livre (`PORT=8080 bash web-ui/bin/start.sh`). Verifique `http://127.0.0.1:4317/api/health`.
 - **Um CV adaptado parece enxuto demais.** É o gate de veracidade funcionando — ele não inventa experiência. Adicione as evidências reais ao `cv.md` (ou ao seu GitHub) e adapte novamente.
 - **O coworker não envia um e-mail.** É proposital — os envios passam por aprovação. Aprove o check-in ou mude o modo de permissão no OpenWorker se quiser menos avisos (entenda o trade-off primeiro).

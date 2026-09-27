@@ -2,6 +2,23 @@
 
 All notable changes to **career-ops-coworker** are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project adheres to [Semantic Versioning](https://semver.org/). The coworker's own `version:` (in `career-ops.md` frontmatter) tracks the major line — OpenWorker shows it as the "replaces vN" note on re-import.
 
+## [1.5.0] — 2026-09-27
+
+Parity with `career-ops` v1.34.0 — the coworker writes the tracker the way the project does.
+
+### Changed
+- **Track goes through `set-status.mjs`, never a hand-edit.** The persona told the coworker to "append/update the row in `data/applications.md`" directly. The project's own modes (`apply`, `followup`, `tracker`, `outcome`, `patterns`) now all route status changes through **`node set-status.mjs <report#|company> <State>`** and say *never hand-edit the table*: it validates the state against the canonical set, holds the tracker lock, and appends the transition to `data/status-log.tsv` (the ledger `funnel-velocity.mjs` reads). A hand-edit skipped all three. The persona's *Track* helper and loop step 4 now name it, with `--on YYYY-MM-DD` (real event day), `--note`, `--role` and `--dry-run`; a brand-new row goes through the tracker-additions TSV + `npm run merge` (`merge-tracker.mjs`). README "What it does" table updated to match.
+
+### Added
+- **Setup helpers in the stage map.** A new *Before the first run* line names `npm run doctor` and **`node validate-profile.mjs`** (new in `career-ops`, 2026-09-25) — a misspelled `config/profile.yml` key otherwise parses cleanly and silently falls back to the default output language / spend tier. It warns, never fails.
+- **Scan: discover what the scanners already saw.** `node discover-new-companies.mjs --out <file>` (new, 2026-09-25) lists companies found in `data/scan-history.tsv` that `portals.yml` does not track; `node discover-ats.mjs --in <file> --summary` previews their boards. Writing them into `portals.yml` (`--write`) is flagged approval-gated.
+- `npm run cv:verify-ats` named next to `node verify-ats.mjs` in the persona and next to `cv:verify-facts` in the README.
+- **Help ×17:** §5 *Track* gains the `set-status.mjs` sentence; §10 Troubleshooting gains a "a `config/profile.yml` setting seems ignored" bullet (`validate-profile.mjs`, `npm run doctor`). Bullets only — heading structure untouched, the 17-locale parity gate stays green. README troubleshooting table gains the same row.
+
+### Verified
+- Every script, flag and path the repo references re-checked against `career-ops` v1.34.0 (72 npm scripts): the six documented `npm run` scripts plus `cv:verify-ats`, `doctor`, `merge`; every `scan.mjs` flag (`--dry-run`, `--company`, `--since`, `--posted-after`, `--verify`, `--quiet`); all 19 previously-mapped helpers; the new `set-status.mjs` (`--on`/`--note`/`--role`/`--dry-run`), `validate-profile.mjs`, `discover-new-companies.mjs` (`--out`) and `discover-ats.mjs` (`--in`/`--summary`/`--write`). `career-ops-ui` (v1.237.x → v1.238.0): `bin/start.sh`, default port `4317`, `GET /api/health`, `node server/index.mjs`, Node ≥ 18 — all current. The persona states no source/adapter counts or versions of either project, so nothing there drifted.
+- `scripts/validate-persona.py` — INSTALLABLE ✓. Help parity ×17 — 12 H2, unchanged. `bash -n` on `install.sh` and `scripts/build-bundle.sh`.
+
 ## [1.4.0] — 2026-08-29
 
 The coworker now knows the project's deterministic helpers for the stages it already performs.

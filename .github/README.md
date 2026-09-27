@@ -167,6 +167,7 @@ This runs the exact rules OpenWorker's own loader applies (id slug, permission m
 | **URL/folder install errors on a `*.md`** | OpenWorker installs **every** top-level `*.md` in the repo as a persona. This repo keeps `career-ops.md` as the **only** root Markdown file (README/CHANGELOG/CLAUDE live under `.github/` and `docs/`) precisely so the repo installer succeeds — don't add other `.md` files at the root. |
 | **"choose a folder" keeps asking** | the persona is `requires_folder: true` — point it at the `career-ops` directory (the one with `cv.md`). |
 | **Scan returns 0 postings** | check `portals.yml` is valid and the board slug is right; run `node scan.mjs --dry-run` from the folder to see errors. On a full-tunnel VPN, some boards (e.g. hh.ru) 403 — disconnect the VPN while scanning. |
+| **A `config/profile.yml` setting seems ignored** (wrong output language, default `spend_tier`) | usually a misspelled key — run `node validate-profile.mjs` from the project folder to name it, and `npm run doctor` for the full setup checklist. |
 | **"open the dashboard" fails** | ensure `web-ui/` exists inside the project (Step 3), or pass `CAREER_OPS_ROOT=/path/to/career-ops bash web-ui/bin/start.sh` if it lives elsewhere. |
 | **Model errors / rate limits** | switch or fix the key in **OpenWorker's** settings (not this repo); lower `spend_tier` in `config/profile.yml` to use a cheaper model. |
 | **A tailored CV looks thin** | that's the truthfulness gate working — it won't invent experience. Add the real detail to `cv.md` and re-tailor. |
@@ -213,8 +214,8 @@ A coworker is **not code** — OpenWorker runs none of this repo as a program. P
 |---|---|---|
 | **Scan** | Pulls fresh postings from the boards in your `portals.yml`. Zero API tokens — pure HTTP. | `npm run scan` (`node scan.mjs`), `--dry-run` / `--company` / `--since` |
 | **Score fit** | Rates each posting 0–5 against your CV + profile + two-pager, with the concrete gaps. | reads `cv.md`, `config/profile.yml`, `config/two-pager.yml` |
-| **Tailor** | Writes a role-specific CV + cover letter as files, grounded **only** in your real experience. | `npm run cv:verify-facts` (truthfulness gate) |
-| **Track** | Updates `data/applications.md` with the project's canonical status. | `npm run tracker` |
+| **Tailor** | Writes a role-specific CV + cover letter as files, grounded **only** in your real experience. | `npm run cv:verify-facts` (truthfulness gate) + `npm run cv:verify-ats` (parseability gate) |
+| **Track** | Updates `data/applications.md` with the project's canonical status — through the project's own write path, never by hand-editing the status cell. | `node set-status.mjs <report#\|company> <State>` (`--on YYYY-MM-DD`), `npm run merge` (new rows), `npm run tracker` |
 | **Follow up** | Drafts the email; sending is approval-gated. | Gmail connector |
 | **Interviews** | Places slots on your calendar; approval-gated. | Google Calendar connector |
 | **Dashboard** | Opens the `career-ops-ui` web UI locally. | `bash web-ui/bin/start.sh` → `http://127.0.0.1:4317` |
