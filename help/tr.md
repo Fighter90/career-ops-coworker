@@ -67,7 +67,7 @@ Coworker her göreve kısa bir planla başlar (ilerleme paneli), her seferinde t
 - **Scan** — proje tarayıcısını çalıştırır (`npm run scan` → `node scan.mjs`; `--dry-run`, `--company "<Name>"`, `--since 7` gibi bayraklar). Sıfır API tokenı — genel panolara karşı saf HTTP. Kaç ilan olduğunu ve hangi kaynaklardan geldiğini bildirir.
 - **Score fit** — her ilanı CV + profile + two-pager'ınıza göre **0–5** arasında puanlar; tek satırlık bir gerekçe ve somut eksikliklerle birlikte. Sıralar ve en iyi birkaçını öne çıkarır.
 - **Tailor** — istek üzerine, role özgü bir CV ve bir ön yazıyı dosya olarak yazar (`reports/` veya `applications/` altında). **Yalnızca** CV'nizde zaten var olan gerçeklere dayanır; asla bir işveren, tarih, metrik veya beceri uydurmaz ve bir eksikliği örtbas etmek yerine işaretler. (`npm run cv:verify-facts` projenin doğruluk kapısıdır; `npm run cv:verify-ats` ise eşlik eden okunabilirlik kapısıdır — facts bir iddianın DOĞRU olup olmadığını, ATS bir özgeçmiş ayrıştırıcısının onu OKUYABİLİP okuyamadığını denetler.)
-- **Track** — `data/applications.md` içindeki satırı, projenin zaten kullandığı kanonik durumla ekler/günceller.
+- **Track** — `data/applications.md` içindeki satırı, projenin zaten kullandığı kanonik durumla ekler/günceller. Durum değişiklikleri projenin kanonik yazma yolundan, `node set-status.mjs <report#|company> <State>` üzerinden geçer (gerçek olay günü için `--on YYYY-MM-DD` ekleyin) — durumu doğrular, tracker kilidini tutar ve geçişi kaydeder; bu yüzden coworker durum hücresini asla elle düzenlemez.
 - **Follow up** — kadansı kontrol eder ve e-postanın **taslağını** hazırlar; gönderim onaya tabidir. Zamanı gelme bilgisi, her başvuruyu urgent / overdue / waiting / cold olarak sınıflayan projeye ait `node followup-cadence.mjs` dosyasından gelir; başka bir soruyu yanıtlayan izleyici durumundan değil.
 - **Interviews** — istek üzerine, takviminize mülakat zaman aralıkları yerleştirir ve hazırlık hatırlatıcıları ekler (onaya tabidir).
 
@@ -102,6 +102,7 @@ Coworker `scheduling: true` bildirir, böylece OpenWorker'da yinelenen çalışt
 ## 10. Troubleshooting
 
 - **"İlan bulunamadı."** `portals.yml` dosyasının etkin şirketleri/panoları listelediğini ve ağınızın onlara ulaştığını doğrulayın (bazı bölgesel panolar tam tünel VPN arkasında engellenir — bağlantıyı kesip yeniden tarayın). Önizleme için `npm run scan -- --dry-run` deneyin.
+- **`config/profile.yml` içindeki bir ayar yok sayılıyor gibi** (yanlış çıktı dili, varsayılan spend tier). Genellikle yanlış yazılmış bir anahtardır — `node validate-profile.mjs` onu adlandırır, `npm run doctor` ise tam kurulum kontrol listesini yazdırır.
 - **Dashboard açılmıyor.** Node ≥ 18'in kurulu olduğundan ve 4317 portunun boş olduğundan emin olun (`PORT=8080 bash web-ui/bin/start.sh`). `http://127.0.0.1:4317/api/health` adresini kontrol edin.
 - **Uyarlanmış bir CV zayıf görünüyor.** Bu, doğruluk kapısının çalışmasıdır — deneyim uydurmaz. Gerçek kanıtları `cv.md` dosyasına (veya GitHub'ınıza) ekleyin ve yeniden uyarlayın.
 - **Coworker bir e-posta göndermiyor.** Tasarım gereği — gönderimler onaya tabidir. Check-in'i onaylayın veya daha az istem istiyorsanız OpenWorker'da izin modunu değiştirin (önce ödünleşimi anlayın).

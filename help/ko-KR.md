@@ -67,7 +67,7 @@ coworker는 모든 작업을 짧은 계획(진행 상황 패널)으로 시작해
 - **Scan** — 프로젝트 스캐너를 실행합니다(`npm run scan` → `node scan.mjs`; `--dry-run`, `--company "<Name>"`, `--since 7` 같은 플래그). API 토큰 0개 — 공개 보드를 상대로 한 순수 HTTP입니다. 몇 개의 공고를 어떤 소스에서 찾았는지 보고합니다.
 - **Score fit** — 각 공고를 당신의 CV + profile + two-pager와 비교해 **0–5**점으로 평가하며, 한 줄 이유와 구체적인 격차를 함께 제시합니다. 순위를 매겨 상위 몇 개를 보여줍니다.
 - **Tailor** — 요청 시 역할별 CV와 커버 레터를 파일로 작성합니다(`reports/` 또는 `applications/` 아래). **오직** 당신의 CV에 이미 있는 사실에만 근거합니다. 고용주, 날짜, 지표, 스킬을 절대 지어내지 않으며, 격차를 덮어 감추는 대신 표시합니다. (`npm run cv:verify-facts`가 프로젝트의 진실성 게이트이고, `npm run cv:verify-ats`가 짝을 이루는 판독성 게이트입니다 — facts는 주장이 사실인지를, ATS는 이력서 파서가 읽을 수 있는지를 확인합니다.)
-- **Track** — 프로젝트가 이미 사용하는 표준 상태로 `data/applications.md`의 행을 추가하거나 업데이트합니다.
+- **Track** — 프로젝트가 이미 사용하는 표준 상태로 `data/applications.md`의 행을 추가하거나 업데이트합니다. 상태 변경은 프로젝트의 표준 쓰기 경로인 `node set-status.mjs <report#|company> <State>`를 거칩니다(실제 발생일은 `--on YYYY-MM-DD` 추가). 상태를 검증하고 트래커 잠금을 잡고 전환을 기록하므로, 코워커는 상태 셀을 직접 편집하지 않습니다.
 - **Follow up** — 주기를 확인하고 이메일 **초안을 작성**합니다. 발송은 승인이 필요합니다. 기한 도래 여부는 각 지원을 urgent / overdue / waiting / cold로 분류하는 프로젝트 자체의 `node followup-cadence.mjs`에서 가져오며, 다른 질문에 답하는 트래커 상태에서 가져오지 않습니다.
 - **Interviews** — 요청 시 당신의 캘린더에 면접 일정을 넣고 준비 알림을 추가합니다(승인 필요).
 
@@ -102,6 +102,7 @@ coworker는 `scheduling: true`를 선언하므로 OpenWorker에서 반복 실행
 ## 10. Troubleshooting
 
 - **「공고를 찾지 못함.」** `portals.yml`에 활성화된 회사/보드가 나열되어 있는지, 그리고 네트워크가 그들에 도달하는지 확인하세요(일부 지역 보드는 풀터널 VPN 뒤에서 차단됩니다 — VPN을 끊고 다시 스캔하세요). 미리 보려면 `npm run scan -- --dry-run`을 실행해 보세요.
+- **`config/profile.yml` 설정이 무시되는 것 같습니다** (잘못된 출력 언어, 기본 spend tier). 대개 키 오타입니다 — `node validate-profile.mjs`가 해당 키를 알려 주고, `npm run doctor`가 전체 설정 점검 목록을 출력합니다.
 - **대시보드가 열리지 않음.** Node ≥ 18이 설치되어 있고 포트 4317이 비어 있는지 확인하세요(`PORT=8080 bash web-ui/bin/start.sh`). `http://127.0.0.1:4317/api/health`를 확인하세요.
 - **맞춤 작성된 CV가 빈약해 보임.** 이는 진실성 게이트가 작동하는 것입니다 — 경력을 지어내지 않습니다. 실제 근거를 `cv.md`(또는 당신의 GitHub)에 추가하고 다시 맞춤 작성하세요.
 - **coworker가 이메일을 보내지 않음.** 의도된 동작입니다 — 발송은 승인이 필요합니다. 확인 요청을 승인하거나, 확인 창을 줄이고 싶다면 OpenWorker에서 권한 모드를 바꾸세요(먼저 트레이드오프를 이해하세요).

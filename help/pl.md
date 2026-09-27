@@ -67,7 +67,7 @@ Coworker zaczyna każde zadanie od krótkiego planu (panel postępu), pracuje et
 - **Scan** — uruchamia skaner projektu (`npm run scan` → `node scan.mjs`; flagi takie jak `--dry-run`, `--company "<Name>"`, `--since 7`). Zero tokenów API — czysty HTTP wobec publicznych tablic ofert. Raportuje, ile ogłoszeń i z jakich źródeł.
 - **Score fit** — ocenia każde ogłoszenie w skali **0–5** względem Twojego CV + profile + two-pager, z jednozdaniowym uzasadnieniem i konkretnymi brakami. Rankinguje i pokazuje kilka najlepszych.
 - **Tailor** — na żądanie tworzy CV pod konkretną rolę i list motywacyjny jako pliki (w `reports/` lub `applications/`). Ugruntowane **wyłącznie** w faktach już obecnych w Twoim CV; nigdy nie wymyśla pracodawcy, daty, metryki ani umiejętności i sygnalizuje brak, zamiast go zamaskować. (`npm run cv:verify-facts` to projektowa bramka prawdziwości; `npm run cv:verify-ats` to bliźniacza bramka czytelności maszynowej — facts sprawdza, czy twierdzenie jest PRAWDZIWE, ATS czy parser CV potrafi je ODCZYTAĆ.)
-- **Track** — dodaje/aktualizuje wiersz w `data/applications.md` z kanonicznym statusem, którego projekt już używa.
+- **Track** — dodaje/aktualizuje wiersz w `data/applications.md` z kanonicznym statusem, którego projekt już używa. Zmiany statusu przechodzą przez kanoniczną ścieżkę zapisu projektu, `node set-status.mjs <report#|company> <State>` (dodaj `--on YYYY-MM-DD` dla faktycznej daty zdarzenia) — waliduje status, trzyma blokadę trackera i zapisuje przejście, więc coworker nigdy nie edytuje komórki statusu ręcznie.
 - **Follow up** — sprawdza rytm kontaktu i **przygotowuje szkic** wiadomości; wysyłka wymaga zatwierdzenia. Termin bierze się z projektowego `node followup-cadence.mjs`, który klasyfikuje każdą aplikację jako urgent / overdue / waiting / cold, a nie ze statusu w trackerze, który odpowiada na inne pytanie.
 - **Interviews** — na żądanie umieszcza terminy rozmów w Twoim kalendarzu i dodaje przypomnienia o przygotowaniu (za zatwierdzeniem).
 
@@ -102,6 +102,7 @@ Coworker deklaruje `scheduling: true`, więc w OpenWorker możesz ustawić cykli
 ## 10. Troubleshooting
 
 - **„Nie znaleziono ogłoszeń”.** Sprawdź, czy `portals.yml` zawiera włączone firmy/tablice ofert i czy Twoja sieć do nich dociera (niektóre regionalne tablice są blokowane przez VPN w trybie pełnego tunelu — rozłącz go i przeskanuj ponownie). Aby zobaczyć podgląd, spróbuj `npm run scan -- --dry-run`.
+- **Ustawienie z `config/profile.yml` wydaje się ignorowane** (zły język wyjściowy, domyślny spend tier). Zwykle to literówka w kluczu — `node validate-profile.mjs` go wskaże, a `npm run doctor` wypisze pełną listę kontrolną instalacji.
 - **Dashboard się nie otwiera.** Upewnij się, że zainstalowany jest Node ≥ 18 i że port 4317 jest wolny (`PORT=8080 bash web-ui/bin/start.sh`). Sprawdź `http://127.0.0.1:4317/api/health`.
 - **Dopasowane CV wygląda ubogo.** To działa bramka prawdziwości — nie wymyśli doświadczenia. Dodaj rzeczywiste dowody do `cv.md` (lub swojego GitHuba) i dopasuj ponownie.
 - **Coworker nie wysyła wiadomości e-mail.** Tak zaprojektowano — wysyłki wymagają zatwierdzenia. Zatwierdź prośbę o potwierdzenie lub zmień tryb uprawnień w OpenWorker, jeśli chcesz mieć mniej zapytań (najpierw zrozum kompromis).
